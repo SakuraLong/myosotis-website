@@ -1,23 +1,22 @@
-# sakura renderer web
+# Myosotis Website
 
-官网的源代码，可以在本地部署查看文档和渲染
+该渲染器由SakuraRenderer修改而来，其区别主要在于：
 
-## 文章源代码
+1. 由借助Vue3转为原生JavaScript编写
+2. 除纯文本以外（结构、组件、模板、模块、内置标签、语法）均转为对象，准备设计内联JavaScript代码来进行事件等处理
+3. 加入“结构{()}”，便于进行页面布局
+4. 加入“?config”，为不被“{||}”包裹的组件进行可选项设置
+5. 优化文件结构
+6. 修改渲染流程，先进行文章树构建，再进行渲染
+7. 优化继承逻辑，便于继承重写
+8. 加入可选项设置（架构已完成，未接入）
+9. 加入转义字符设定（已完成）
+10. 加入自定义组件、模板、模块、转义字符、语法
+11. 优化写作语法，减少使用\\n\\n的次数
 
-官网所有的文档的源代码位于src/Document/documents路径下
+# 注意 
 
-文件命名方式与官网地址路径的最后一个单词相同，如：官网根地址/docu/a下显示的文档，在源代码中保存在a.js下
-
-
-## 官网链接
-See [Sakura Renderer](http://123.249.110.185:8000/).
-
-## 渲染器源代码链接
-See [Sakura Renderer](https://github.com/SakuraLong/sakuraRenderer).
-
-## 注意
-
-如果需要改变GitHub令牌，需要去src/store/index.js下改变
+该渲染器未完成
 
 ## Project setup
 ```
