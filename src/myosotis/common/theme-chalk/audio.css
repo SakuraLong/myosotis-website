@@ -1,0 +1,42 @@
+.sa-audio-container {
+    overflow: hidden;
+    max-width: 100%;
+    flex-wrap: wrap;
+}
+.sa-audio-container--left,
+.sa-audio-container--right {
+    display: inline-block;
+}
+.sa-audio-container--center {
+    display: flex;
+    align-items: center;
+}
+.sa-audio-container--column {
+    display: flex;
+    flex-direction: column;
+}
+.sa-audio-container--row {
+    display: flex;
+    flex-direction: row;
+}
+.sa-audio {
+    max-width: 100%;
+    min-width: 100px;
+}
+.sa-audio-name {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+}
+.sa-audio-name span {
+    display: inline-block;
+}
+.sa-audio-name--LR {
+    flex-direction: row;
+}
+.sa-audio-name--TB {
+    flex-direction: column;
+}
+.sa-audio-name--TB span {
+    text-align: center;
+}

@@ -1,0 +1,92 @@
+:root {
+    --sa-color-title-text: var(--sa-color-primary-text);
+    --sa-color-title-border: var(--sa-color-primary-base);
+    --sa-color-title-a-text: var(--sa-color-primary-base);
+    --sa-color-title-before-text: var(--sa-color-basic-transparent)
+}
+.sa-title--article {
+    text-align: center;
+    color: var(--sa-color-title-text);
+}
+.sa-title {
+    position: relative;
+    padding: 0;
+    border: 0;
+    min-width: 1em;
+    word-break: break-all;
+}
+.sa-title__a{
+    user-select: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(100% + 0.25em);
+    text-decoration:none;
+    color: var(--sa-color-title-a-text);
+    transition: all 0.2s linear;
+    opacity: 0;
+}
+.sa-title:hover>.sa-title__a{
+    transition: all 0.2s linear;
+    opacity: 1;
+}
+.sa-title--center {
+    width: 100%;
+    text-align: center;
+    color: var(--sa-color-title-text);
+    clear: both;
+}
+.sa-title--left {
+    width: auto;
+    text-align: left;
+    color: var(--sa-color-title-text);
+}
+.sa-title--border-left {
+    padding-left: 0.4em;
+}
+.sa-title--border-left::before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    content: "";
+    width: 0.25em;
+    height: 80%;
+    background-color: var(--sa-color-title-border);
+    border-radius: 1em;
+}
+.sa-title--border-left--ani::before {
+    height: 0;
+    transition: all 0.2s linear;
+}
+.sa-title--border-left--ani:hover.sa-title--border-left--ani::before {
+    transition: all 0.2s linear;
+    height: 80%;
+}
+
+.sa-title--border-bottom > span {
+    position: relative;
+    padding-bottom: 0.3em;
+}
+.sa-title--border-bottom > span::before {
+    word-break: break-all;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    content: attr(data-title);
+    width: 100%;
+    height: 0.25em;
+    background-color: var(--sa-color-title-border);
+    border-radius: 1em;
+    color: var(--sa-color-title-before-text);
+    overflow: hidden;
+}
+.sa-title--border-bottom--ani > span::before {
+    width: 0;
+    transition: width 0.3s linear;
+}
+.sa-title--border-bottom--ani:hover.sa-title--border-bottom--ani > span::before {
+    transition: width 0.3s linear;
+    width: 100%;
+}

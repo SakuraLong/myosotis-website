@@ -1,0 +1,20 @@
+:root{
+    --sa-color-ref-node-text: var(--sa-color-primary-base);
+    --sa-color-ref-node-text-hover: var(--sa-color-primary-light-3);
+    --sa-color-ref-node-text-active: var(--sa-color-primary-light-5);
+}
+.sa-ref-node--arrow,
+.sa-ref-node--link{
+    color: var(--sa-color-ref-node-text);
+    text-decoration: none;
+}
+/* .sa-ref-node--link::before{
+    content: "\e662";
+} */
+.sa-ref-node--arrow:hover,
+.sa-ref-node--link:hover{
+    color: var(--sa-color-ref-node-text-hover) !important;
+}
+/* .sa-ref-node--link:visited{
+    color: var(--sa-color-ref-node-text-active);
+} */

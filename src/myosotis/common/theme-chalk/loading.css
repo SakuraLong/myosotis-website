@@ -1,0 +1,53 @@
+:root {
+    --sa-color-loading-default-circle-after-bgcolor: var(--sa-color-primary-dark-2)
+}
+.sa-loading {
+    display: inline-block;
+    position: relative;
+    pointer-events: none;
+}
+.sa-loading--default__box {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(225deg);
+    animation-name: sa-loading-default-ani-opacity;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.sa-loading--default__circle {
+    position: absolute;
+    animation-name: sa-loading-default-ani-move;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes sa-loading-default-ani-move {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(720deg);
+    }
+}
+@keyframes sa-loading-default-ani-opacity {
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 1;
+    }
+    82% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}

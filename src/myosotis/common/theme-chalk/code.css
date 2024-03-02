@@ -1,0 +1,18 @@
+:root {
+    --sa-color-code-bg: var(--sa-color-base-fill)
+}
+
+.sr-code {
+    padding: 15px;
+    line-height: 1.5;
+    overflow: auto;
+    background-color: var(--sa-color-code-bg);
+    border-radius: 5px;
+}
+
+.sr-code-span {
+    padding: 0px 5px 0px 5px;
+    background-color: var(--sa-color-code-bg);
+    border-radius: 5px;
+    line-height: 1.5;
+}

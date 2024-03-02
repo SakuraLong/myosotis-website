@@ -1,0 +1,15 @@
+.sa-sr-hide-item {
+    display: inline-block;
+    background-color: var(--sa-color-primary-text);
+    /* 设置背景颜色为文字颜色 */
+    color: var(--sa-color-primary-text);
+    /* 设置文字颜色为--sa-color-primary-text */
+
+    /* 添加过渡效果 */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sa-sr-hide-item:hover {
+    background-color: rgba(0, 0, 0, 0);
+    /* 鼠标移动到上面时背景颜色透明化 */
+}

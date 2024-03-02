@@ -1,0 +1,131 @@
+:root {
+    --sa-color-table-text: var(--sa-color-primary-text);
+    --sa-color-table-title-text: var(--sa-color-placeholder-text);
+    --sa-color-tr-fill: var(--sa-color-base-background);
+    --sa-color-tr-hover-fill: var(--sa-color-base-fill);
+    --sa-color-tr-border-bottom: var(--sa-color-base-border);
+    --sa-color-td-border: var(--sa-color-base-border);
+}
+
+.sa-table-container{
+    position: relative;
+    max-width: 100%;
+    /* overflow: hidden; */
+    width: auto;
+    height: auto;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    line-height: normal !important;
+}
+.sa-table-container--inline-block{
+    display: inline-block;
+}
+.sa-table--block{
+    display: block;
+}
+
+.sa-table-button{
+    cursor: pointer;
+    width: 100%;
+    min-width: 100px;
+    transition: all 0.1s linear;
+    text-align: center;
+    user-select: none;
+    padding: 0.05em;
+}
+.sa-table-button:hover{
+    transition: all 0.1s linear;
+    background-color: var(--sa-color-tr-hover-fill);
+}
+
+.sa-table-name{
+    width: 100%;
+    min-width: 100px;
+    transition: all 0.1s linear;
+    text-align: center;
+    user-select: none;
+    padding: 0.05em;
+}
+
+.sa-table {
+    color: var(--sa-color-table-text);
+    border-collapse: collapse;
+}
+.sa-table-name {
+    text-align: center;
+}
+.sa-table__thead > .sa-table__tr,
+.sa-table__td--title {
+    font-weight: bold;
+    color: var(--sa-color-table-title-text);
+}
+
+.sa-table__thead {
+
+}
+.sa-table__tr {
+    /* background-color: var(--sa-color-tr-fill); */
+    transition: all 0.1s linear;
+}
+.sa-table__td {
+    text-align: center;
+    margin: 0;
+}
+.sa-table__td--no-wh{
+    min-width: 4em;
+    padding: 0.1em;
+}
+.sa-table__td--no-wh{
+    word-break: break-all;
+}
+
+/* hover样式 row */
+.sa-table__tbody > .sa-table__tr--hover {
+    transition: all 0.1s linear;
+}
+.sa-table__tbody > .sa-table__tr--hover:hover {
+    transition: all 0.1s linear;
+    background-color: var(--sa-color-tr-hover-fill);
+}
+.sa-table__td--cr {
+    transition: all 0.1s linear;
+    background-color: var(--sa-color-tr-fill);
+}
+.sa-table__tbody > .sa-table__tr--hover:hover .sa-table__td--cr {
+    background-color: var(--sa-color-tr-fill);
+}
+.sa-table__tr--hover:has(.sa-table__td--cr:hover){
+    background-color: var(--sa-color-tr-fill);
+}
+.sa-table__td--cr:hover {
+    transition: all 0.1s linear;
+    background-color: var(--sa-color-tr-hover-fill) !important;
+}
+/* hover样式 node */
+.sa-table__tbody .sa-table__td--hover-node {
+    transition: all 0.1s linear;
+    background-color: var(--sa-color-tr-fill);
+}
+.sa-table__tbody .sa-table__td--hover-node:hover {
+    transition: all 0.1s linear;
+    background-color: var(--sa-color-tr-hover-fill);
+}
+/* border样式 */
+.sa-table--border {
+    border: 1px solid var(--sa-color-tr-border-bottom);
+    border-bottom: none;
+}
+.sa-table__td--border-anytime {
+    border: 1px solid var(--sa-color-tr-border-bottom);
+}
+.sa-table__td--border {
+    border-left: 1px solid var(--sa-color-tr-border-bottom);
+    border-bottom: 1px solid var(--sa-color-tr-border-bottom);
+}
+.sa-table--border .sa-table__td--border:first-child {
+    border-left: none;
+}
+.sa-table__td--border-bottom {
+    border-bottom: 1px solid var(--sa-color-tr-border-bottom);
+}
+/* 斑马纹样式 */

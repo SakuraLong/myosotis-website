@@ -1,0 +1,53 @@
+title=自定义模板
+-
+{{poem
+|title=If I Can Stop One Heart From Breaking
+|author=Emily Dickinson
+|If I can stop one heart from breaking,
+|I shall not live in vain;
+|If I can ease one life the aching,
+|Or cool one pain,
+|Or help one fainting robin
+|Unto his nest again,
+|I shall not live in vain.
+}}
+
+{{poem
+|title=假如我能使一颗心免于忧伤
+|author=艾米莉·狄金森
+|假如我能使一颗心免于忧伤，
+|我就没有虚度此生。
+|假如我能使痛苦的生命有所慰藉，
+|在酸辛中获得温情，
+|或是让一只昏厥的知更鸟
+|重新回到窝中，
+|我就没有虚度此生。
+}}
+
+<code>##
+title=自定义模板
+-
+{{poem
+|title=If I Can Stop One Heart From Breaking
+|author=Emily Dickinson
+|If I can stop one heart from breaking,
+|I shall not live in vain;
+|If I can ease one life the aching,
+|Or cool one pain,
+|Or help one fainting robin
+|Unto his nest again,
+|I shall not live in vain.
+}}
+
+{{poem
+|title=假如我能使一颗心免于忧伤
+|author=艾米莉·狄金森
+|假如我能使一颗心免于忧伤，
+|我就没有虚度此生。
+|假如我能使痛苦的生命有所慰藉，
+|在酸辛中获得温情，
+|或是让一只昏厥的知更鸟
+|重新回到窝中，
+|我就没有虚度此生。
+}}
+</code>

@@ -1,0 +1,80 @@
+:root {
+    --sa-color-para-danger: var(--sa-color-danger-base);
+    --sa-color-para-primary: var(--sa-color-primary-base);
+    --sa-color-para-success: var(--sa-color-success-base);
+    --sa-color-para-warning: var(--sa-color-warning-base);
+    --sa-color-para-error: var(--sa-color-error-base);
+    --sa-color-para-info: var(--sa-color-info-base);
+    --sa-color-block-warning-bg-color: rgba(var(--sa-color-danger-rgb), .1);
+    --sa-color-block-tip-bg-color: rgba(var(--sa-color-primary-rgb), .1);
+    --sa-color-block-success-bg-color: rgba(var(--sa-color-success-rgb), .1);
+    --sa-color-block-error-bg-color: rgba(var(--sa-color-error-rgb), .1);
+    --sa-color-block-info-bg-color: rgba(var(--sa-color-info-rgb), .1);
+
+}
+
+.sa-pre-para{
+    display: block ; 
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+.sa-para {
+    /* display: block; */
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    /* overflow: hidden; */
+}
+
+.sa-para--center {
+    width: 100%;
+    text-align: center;
+    color: var(--sa-color-title-text);
+}
+.sa-para--left {
+    width: auto;
+    text-align: left;
+    color: var(--sa-color-title-text);
+}
+.sa-para--border-left {
+    /* padding-left: 1rem;
+    padding-left: 1rem; */
+}
+
+
+.sa-para--border-bottom > span {
+    position: relative;
+    padding-bottom: 0rem;
+}
+
+.sa-para--border{
+    padding: 8px 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.sa-para--border-warning {
+    background-color: var(--sa-color-block-warning-bg-color);
+    border-left: 5px solid var(--sa-color-para-danger);
+}
+
+.sa-para--border-success{
+    background-color: var(--sa-color-block-success-bg-color);
+    border-left: 5px solid var(--sa-color-para-success);
+}
+
+.sa-para--border-tip{
+    background-color: var(--sa-color-block-tip-bg-color);
+    border-left: 5px solid var(--sa-color-para-primary);
+}
+
+.sa-para--border-info{
+    background-color: var(--sa-color-block-info-bg-color);
+    border-left: 5px solid var(--sa-color-para-info);
+}
+
+.sa-para-custom-block-title {
+    font-weight: 700;
+    font-size: 20px;
+}

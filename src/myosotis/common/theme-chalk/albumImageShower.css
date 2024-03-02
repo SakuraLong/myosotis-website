@@ -1,0 +1,104 @@
+:root{
+    --sa-color-album-preview-border: var(--sa-color-base-border)
+}
+
+.sr-album-is{
+    position: relative;
+    text-align: center;
+    width: auto;
+    height: auto;
+    flex-direction: column; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    /* max-width: max-content; */
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+.sr-album--align--center{
+    width: 100%;
+    margin: 0 auto;
+    float:none;
+    clear: both;
+}
+.sr-album--align--left{
+    margin:0;
+    float: left;
+}
+.sr-album--align--right{
+    margin:0;
+    float: right;
+}
+.sr-album--align--none{
+    margin:0;
+    float: none;
+}
+.sr-album--preview--div{
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    max-width: max-content;
+    max-height: max-content;
+    overflow: hidden;
+    /* object-fit: contain */
+}
+.sr-album--preview--img{
+    width: 100%;
+    height: auto;
+}
+.sr-album--info{
+    align-items: center;
+    margin-bottom: 10px;
+}
+.sr-album--controls {
+    width: calc(100% - 2px);
+    color: #555;
+    display: flex;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    justify-content: center;
+    border-left: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+}
+.sr-album-decorate{
+    height: 4px;
+    position: relative;
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: calc(100% - 2px);
+}
+.sr-album-decorate::before,.sr-album-decorate::after{
+    border: 1px solid #e6e6e6;
+    border-top-color: #f5f5f5;
+    box-sizing: content-box;
+    content: " ";
+    height: 1px;
+    position: absolute;
+}
+.sr-album-decorate::before{
+    left: 3px;
+    right: 3px;
+}
+.sr-album-decorate::after{
+    left: 3px;
+    right: 3px;
+    top:3px;
+}
+.sr-album--controls--right{
+    color: grey;
+}
+.sr-album--controls--left{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

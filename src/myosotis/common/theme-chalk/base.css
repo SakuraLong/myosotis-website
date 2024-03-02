@@ -1,0 +1,56 @@
+:root {
+    --sa-color-icon: var(--sa-color-basic-white)
+}
+
+html{
+    /* scroll-behavior: smooth; */
+}
+p{
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    /* word-break: break-all; */
+}
+pre{
+    font-family: inherit;
+    margin: 0;
+    /* line-height: 1.5;
+    text-align: center;
+    font-size: 30px; */
+}
+
+/* icon */
+.sa-icon {
+    display: inline-block;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    /* color: white; */
+    user-select: none;
+}
+
+/* 不知道如何关闭 */
+.katex-html{
+    display: none;
+}
+
+/* 通用 */
+.sa-center {
+    margin: 0 auto;
+}
+.sa-float--left {
+    float: left;
+}
+.sa-float--right {
+    float: right;
+}
+
+/* test */
+
+.sa-test-div{
+    width: 40px;
+    height: 40px;
+    background-color: blueviolet;
+    position: fixed;
+    top: 300px;
+    left: 300px;
+}

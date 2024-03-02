@@ -1,0 +1,32 @@
+import Title from './title.mjs'
+import Paragraph from './para.mjs'
+
+class Components {
+  constructor(config, replaceManager) {
+    this.config = config
+    this.replaceManager = replaceManager
+    this.parsers = [
+      Title,
+      Paragraph
+    ]
+  }
+  build(nodeStack, src, para = false) {
+    if (src === '') return
+    if (para) {
+      new Paragraph(this.config, src, this.replaceManager).build(nodeStack)
+    } else {
+      for (const Parser of this.parsers) {
+        const t = new Parser(
+          this.config,
+          src,
+          this.replaceManager
+        )
+        if (!t.judge()) continue
+        t.build(nodeStack)
+        break
+      }
+    }
+  }
+}
+
+export default Components

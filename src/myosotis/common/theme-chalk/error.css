@@ -1,0 +1,8 @@
+:root {
+    --sa-color-error-bgcolor: var(--sa-color-danger-base)
+}
+.sa-error {
+    background-color: var(--sa-color-error-bgcolor);
+    border-radius: 4px;
+    padding: 0px 2px 0px 2px;
+}

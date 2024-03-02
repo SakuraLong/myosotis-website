@@ -1,0 +1,18 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--sa-color-primary-text);
+}
+html {
+    padding-bottom: 20px;
+}
+
+:root {
+    --container-max-width: 1400px;
+}
+
+@font-face {
+    font-family: "Exo-SemiBold";
+    src: url("font/Exo-SemiBold.ttf");
+}

@@ -1,0 +1,19 @@
+.sa-sr-ahref-item{
+    color: var(--sa-color-primary-base);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sa-sr-ahref-item:hover {
+    color: var(--sa-color-primary-light-3);
+}
+
+.sa-sr-ahref-item:active {
+    color: var(--sa-color-primary-dark-2); 
+    text-decoration: underline;
+}
+
+/* .sa-sr-ahref-item:visited{
+    color: var(--sa-color-primary-dark-2); 
+    text-decoration: underline; 
+} */

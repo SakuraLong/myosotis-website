@@ -1,0 +1,12 @@
+.sa-article-message {
+
+}
+
+.sa-article-message__row {
+    display: flex;
+    justify-content: center;
+}
+
+.sa-article-message__item {
+    margin: 0px 5px 0px 5px;
+}

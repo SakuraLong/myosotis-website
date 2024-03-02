@@ -1,0 +1,6 @@
+src/sakura-renderer/sr_node_modules
+src/sakura-renderer-new/sr_node_modules
+src/myosotis/my_node_modules
+src/sakura-renderer-vue
+
+# *.vue

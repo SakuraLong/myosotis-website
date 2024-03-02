@@ -1,0 +1,24 @@
+.sa-video-shower {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+.sa-video-shower-container {
+    
+}
+.sa-video-shower-container--left,
+.sa-video-shower-container--right {
+    display: flex;
+    flex-direction: column;
+}
+.sa-video-shower-container--center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.sa-video-name {
+    width: 100%;
+    text-align: center;
+}

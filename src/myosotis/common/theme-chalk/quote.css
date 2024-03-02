@@ -1,0 +1,27 @@
+.sa-quote-table {
+    display: table;
+    border-collapse: collapse;
+    margin: auto;
+    background-color: transparent;
+    font-size: 24px;
+}
+.sa-quote-table_td-symbol {
+    /* color: #b2b7f2; */
+    color: #822296;
+    font-size: 36px;
+    font-family: "Times New Roman", serif;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    line-height: 100%;
+}
+.sa-quote-table_td-text {
+    text-align: left;
+    padding: 10px;
+    vertical-align: middle;
+}
+.sa-quote-table_td-from {
+    font-size: smaller;
+    text-align: right;
+    padding-right: 4%;
+}

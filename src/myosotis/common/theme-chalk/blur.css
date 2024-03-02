@@ -1,0 +1,13 @@
+.sa-sr-blur-item {
+    display: inline-block;
+    color: var(--sa-color-primary-text);
+    /* 设置文字颜色为--sa-color-primary-text */
+
+    /* 添加过渡效果 */
+    transition: filter 0.3s ease-in-out;
+}
+
+.sa-sr-blur-item:hover {
+    /* 鼠标悬停时的效果，模糊程度为0，即清除模糊效果 */
+    filter: blur(0) !important;
+}

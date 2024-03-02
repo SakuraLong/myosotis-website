@@ -1,0 +1,100 @@
+/* 基础色 */
+/* :root{
+    --sa-color-primary-base: #409EFF;
+    --sa-color-primary-dark-2: #66b1ff;
+    --sa-color-primary-light-3: #3375b9;
+    --sa-color-primary-light-5: #2a598a;
+    --sa-color-primary-light-7: #213d5b;
+    --sa-color-primary-light-8: #1d3043;
+    --sa-color-primary-light-9: #18222c;
+} */
+:root{
+    --sa-color-primary-base: #FF94D8;
+    --sa-color-primary-dark-2: #AD4E8C;
+    --sa-color-primary-light-3: #FFB3E7;
+    --sa-color-primary-light-5: #FFC8EF;
+    --sa-color-primary-light-7: #FFDCF5;
+    --sa-color-primary-light-8: #FFE6F7;
+    --sa-color-primary-light-9: #FFEFF9;
+}
+/* 辅助色 */
+:root{
+    --sa-color-success-base: #67C23A;
+    --sa-color-success-dark-2: #529b2e;
+    --sa-color-success-light-3: #95d475;
+    --sa-color-success-light-5: #b3e19d;
+    --sa-color-success-light-7: #d1edc4;
+    --sa-color-success-light-8: #e1f3d8;
+    --sa-color-success-light-9: #f0f9eb;
+}
+
+:root{
+    --sa-color-warning-base: #E6A23C;
+    --sa-color-warning-dark-2: #b88230;
+    --sa-color-warning-light-3: #eebe77;
+    --sa-color-warning-light-5: #f3d19e;
+    --sa-color-warning-light-7: #f8e3c5;
+    --sa-color-warning-light-8: #faecd8;
+    --sa-color-warning-light-9: #fdf6ec;
+}
+
+:root{
+    --sa-color-danger-base: #F56C6C;
+    --sa-color-danger-dark-2: #c45656;
+    --sa-color-danger-light-3: #f89898;
+    --sa-color-danger-light-5: #fab6b6;
+    --sa-color-danger-light-7: #fcd3d3;
+    --sa-color-danger-light-8: #fde2e2;
+    --sa-color-danger-light-9: #fef0f0;
+}
+
+:root{
+    --sa-color-info-base: #909399;
+    --sa-color-info-dark-2: #73767a;
+    --sa-color-info-light-3: #b1b3b8;
+    --sa-color-info-light-5: #c8c9cc;
+    --sa-color-info-light-7: #dedfe0;
+    --sa-color-info-light-8: #e9e9eb;
+    --sa-color-info-light-9: #f4f4f5;
+}
+
+:root{
+    /* --sa-color-primary-rgb: 64, 158, 255; */
+    --sa-color-primary-rgb: 255, 148, 216;
+    --sa-color-success-rgb: 103, 194, 58;
+    --sa-color-warning-rgb: 230, 162, 60;
+    --sa-color-danger-rgb: 245, 108, 108;
+    --sa-color-error-rgb: 245, 108, 108;
+    --sa-color-info-rgb: 144, 147, 153;
+}
+
+/* 中性色 */
+:root{
+    --sa-color-basic-black: #000000;
+    --sa-color-basic-white: #FFFFFF;
+    --sa-color-basic-transparent: #00000000;
+    --sa-color-base-background: #FFFFFF;
+    --sa-color-page-background: #F2F3F5;
+
+    --sa-color-darker-fill: #E6E8EB;
+    --sa-color-dark-fill: #EBEDF0;
+    --sa-color-base-fill: #F0F2F5;
+    --sa-color-light-fill: #F5F7FA;
+    --sa-color-lighter-fill: #FAFAFA;
+    --sa-color-extra-light-fill: #FAFCFF;
+    --sa-color-blank-fill: #FFFFFF;
+
+    --sa-color-darker-border: #CDD0D6;
+    --sa-color-dark-border: #D4D7DE;
+    --sa-color-base-border: #DCDFE6;
+    --sa-color-light-border: #E4E7ED;
+    --sa-color-lighter-border: #EBEEF5;
+    --sa-color-extra-light-border: #F2F6FC;
+
+    --sa-color-primary-text: #303133;
+    --sa-color-regular-text: #606266;
+    --sa-color-secondary-text: #909399;
+    --sa-color-placeholder-text: #A8ABB2;
+    --sa-color-disabled-text: #C0C4CC;
+
+}

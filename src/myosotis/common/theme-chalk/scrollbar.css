@@ -1,0 +1,54 @@
+
+:root{
+    --sa-color-scrollbar-thumb: var(--sa-color-placeholder-text);
+    --sa-color-scrollbar-thumb-hover: var(--sa-color-secondary-text)
+}
+
+.sa-scrollbar{
+    position: relative;
+    overflow: auto;
+    display: block;
+}
+
+.sa-scrollbar::-webkit-scrollbar{
+    cursor: pointer !important;
+    width:7px;
+    height:7px;
+    /* background-color: #61B6EB; */
+}
+.sa-scrollbar::-webkit-scrollbar-track{
+    /* background: #eee; */
+}
+.sa-scrollbar::-webkit-scrollbar-thumb{
+    cursor: pointer !important;
+    background: var(--sa-color-scrollbar-thumb);
+    border-radius:100px;
+}
+.sa-scrollbar::-webkit-scrollbar-thumb:hover{
+    cursor: pointer;
+    background: var(--sa-color-scrollbar-thumb-hover);
+}
+.sa-scrollbar::-webkit-scrollbar-corner{
+    /* background: #eb6161; */
+}
+
+.sa-scrollbar__view{
+    width: 100%;
+    height: 100%;
+    /* overflow: auto; */
+}
+.sa-verticle-scrollbar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    /* background-color: aqua; */
+    transition: all linear 0.2s;
+    opacity: 0;
+}
+.sa-verticle-scrollbar__thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.sa-scrollbar:hover .sa-verticle-scrollbar{
+    opacity: 1;
+}

@@ -1,0 +1,29 @@
+.sr-github {
+    display: inline-block;
+    position: relative;
+    height: 32px;
+    margin: 0px 5px 0px 5px;
+}
+
+.sr-github img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.sr-github a {
+    margin-left: 0.5em;
+    height: 32px;
+    line-height: 32px;
+    position: relative;
+    top: -25%;
+    /* transform: translateY(50%); */
+    display: inline-block;
+    color: var(--sa-color-primary-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sr-github a:hover {
+    color: var(--sa-color-primary-base);
+}

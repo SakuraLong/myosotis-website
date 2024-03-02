@@ -1,0 +1,50 @@
+.all-image-container {
+    /* 声明一个容器 */
+    display: grid;
+    /*  声明列的宽度  */
+    grid-template-columns: repeat(1, 2fr);
+    /*  声明行间距和列间距  */
+    grid-gap: 20px;
+    /*  声明行的高度  */
+    grid-template-rows: repeat(1, 3fr);
+    max-width: 100%;
+    cursor: pointer;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.sa-allmage {
+    position: relative;
+    display: block;
+    max-width: 100%;
+}
+
+.all-image-fit{
+  max-width: 100%;
+  display: inline-block;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto; 
+}
+
+.sa-all-image--left {
+    margin: 0;
+    float: left;
+}
+
+.sa-all-image--center{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sa-all-image--right {
+    float: right;
+}
+
+.all-image-container {
+    overflow: hidden;
+}

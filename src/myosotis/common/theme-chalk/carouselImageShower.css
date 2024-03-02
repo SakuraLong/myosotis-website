@@ -1,0 +1,219 @@
+:root {
+    --sa-color-control-background: var(--sa-color-info-light-5);
+    --sa-color-control-active: var(--sa-color-basic-white);
+}
+
+.sa-carousell {
+    display: inline-block;
+    position: relative;
+    display: inline-block;
+    /* margin: 0; */
+    padding: 0;
+    border: 0;
+    max-width: 100%;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.sa-carousell--center {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.sa-carousell--left {
+    float: left;
+}
+
+.sa-carousell--right {
+    float: right;
+}
+
+.sa-carousell .sa-srCarousell-slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.sa-carousell .sa-srCarousell-slide {
+    margin: 0;
+    padding: 0;
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    transition: transform 0.3s;
+}
+
+.sa-carousell .sa-srCarousell-slide {
+    width: 100%;
+    height: 100%;
+}
+.sa-srCarousell-slide {
+    clear: both;
+}
+.sa-srCarousell-img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.sa-carousell .sa-srCarousell-button-left {
+    position: absolute;
+    z-index: 100;
+    height: 100%;
+    width: 40px;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sa-carousell .sa-srCarousell-button-right {
+    position: absolute;
+    z-index: 100;
+    height: 100%;
+    width: 40px;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sa-carousell .sa-srCarousell-button-ele {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.sa-srCarousell-pop-up-left {
+    animation: sa-srCarousell-popUpLeft 0.5s;
+}
+
+.sa-srCarousell-pop-up-right {
+    animation: sa-srCarousell-popUpRight 0.5s;
+}
+
+.sa-srCarousell-pop-out-left {
+    animation: sa-srCarousell-popOutLeft 0.5s;
+}
+
+.sa-srCarousell-pop-out-right {
+    animation: sa-srCarousell-popOutRight 0.5s;
+}
+
+@keyframes sa-srCarousell-popUpLeft {
+    0% {
+        transform: translateX(10px);
+        /* Start below the normal position */
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-10px);
+        /* Return to the normal position */
+        opacity: 0.7;
+    }
+}
+
+@keyframes sa-srCarousell-popOutLeft {
+    0% {
+        transform: translateX(10px);
+        /* Start below the normal position */
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateX(-10px);
+        /* Return to the normal position */
+        opacity: 0;
+    }
+}
+
+@keyframes sa-srCarousell-popUpRight {
+    0% {
+        transform: translateX(-10px);
+        /* Start below the normal position */
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(10px);
+        /* Return to the normal position */
+        opacity: 0.7;
+    }
+}
+
+@keyframes sa-srCarousell-popOutRight {
+    0% {
+        transform: translateX(-10px);
+        /* Start below the normal position */
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateX(10px);
+        /* Return to the normal position */
+        opacity: 0;
+    }
+}
+
+.sa-carousell:hover .sa-srCarousell-button-left,
+.sa-carousell:hover .sa-srCarousell-button-right {
+    opacity: 1;
+}
+
+.sa-carousell .sa-srCarousell-controls {
+    position: absolute;
+    width: 100%;
+    bottom: 2%;
+    text-align: center;
+}
+
+.sa-carousell .sa-srCarousell-control {
+    display: inline-block;
+    width: 20px;
+    height: 2.5px;
+    background-color: var(--sa-color-control-background);
+    opacity: 0.7;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.sa-carousell .sa-srCarousell-control.active {
+    background-color: var(--sa-color-control-active);
+}
+
+.sa-carousell .sa-srCarousell-check {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    color: var(--sa-color-control-background);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s,transform 0.3s;
+}
+
+
+

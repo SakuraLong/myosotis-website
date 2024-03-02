@@ -1,0 +1,89 @@
+:root{
+    --sa-color-article-container-background: var(--sa-color-base-background);
+    --sa-color-cata-area-background: var(--sa-color-page-background);
+    --sa-color-cata-border-left: var(--sa-color-dark-border);
+}
+.sa-article-container{
+    display: block;
+    position: relative;
+    width: 100%;
+    min-width: 400px;
+    background-color: var(--sa-color-article-container-background);
+    text-align: left;
+    /* word-break: break-all; */
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    /* overflow: hidden; */
+}
+.sa-article-container__slot{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.sa-article-container__main{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+.sa-article-container__body--nocata{
+    position: relative;
+    width: 100%;
+}
+.sa-article-container__body--cata{
+    position: relative;
+    float: left;
+    width: calc(100% - 250px);
+    /* box-shadow: inset 0px 0px 10px red; */
+}
+.sa-article-container__body{
+    position: relative;
+    padding: 2rem;
+    background-color: var(--sa-color-article-container-background);
+    text-align: left;
+    /* word-break: break-all; */
+}
+.sa-article-container__cata{
+    position: relative;
+    float: left;
+    /* min-width: 200px;
+    max-width: 300px; */
+    width: 250px;
+    border-left: 2px solid var(--sa-color-cata-border-left);
+    /* box-shadow: inset 0px 0px 10px red; */
+    /* overflow: visible; */
+}
+.sa-article-area,
+.sa-cata-area{
+    position: relative;
+    width: 100%;
+}
+.sa-cata-area{
+    position: sticky;
+    top: 50px;
+    overflow: auto;
+    /* max-height: 500px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--sa-color-cata-area-background);
+    border-radius: 5px;
+}
+.sa-cata-area__container{
+    position: relative;
+    width: calc(100% - 10px);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: var(--sa-color-cata-area-background);
+    /* box-shadow: inset 0px 0px 10px red; */
+}
+.sa-cata-area__container__title{
+    position: relative;
+    width: 100%;
+    /* box-shadow: inset 0px 0px 10px red; */
+}
+.sa-cata-area__container__body{
+
+}

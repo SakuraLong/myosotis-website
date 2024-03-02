@@ -1,0 +1,10 @@
+<code>#javascript#
+import PoemParser from './poemParser.js' // 你的PoemParser路径
+import SakuraRenderer from 'sakura-renderer'
+
+const shower = document.getElementById('shower') // 获取渲染器父节点
+const renderer = SakuraRenderer.createRenderer(shower) // 创建渲染器实例
+renderer.addTemplate(PoemParser) // 为渲染器添加自定义模板
+renderer.setArticle('你的文章内容') // 添加文章内容
+renderer.render() // 渲染文章
+</code>
