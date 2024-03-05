@@ -11,7 +11,7 @@
             alt=""
             draggable="false"
           >
-          <span>Sakura</span>
+          <span>Myosotis</span>
         </div>
       </div>
       <div class="nav-bar__son nav-bar__right">
@@ -150,5 +150,10 @@ export default {
 .right-item a {
   color: initial;
   text-decoration: none;
+}
+
+.structure-1 {
+  width: 50%;
+  float: left;
 }
 </style>

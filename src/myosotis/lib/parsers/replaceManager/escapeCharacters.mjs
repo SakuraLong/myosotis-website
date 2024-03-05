@@ -1,8 +1,16 @@
+// 转义字符替换器
+//
+
 class EscapeCharacters {
   constructor(config) {
     this.config = config
     this.escapeCharactersList = ['|', '{', '}', '-', '~', '*', '+', '_', '=', '[', ']', '?', '/', '$', '\\', '<', '>']
   }
+  /**
+   * 将字符串中的转义字符替换为忽略区域
+   * @param {String} src 待替换的字符串
+   * @returns 替换好的字符串
+   */
   replace(src) {
     for (let i = 0; i < src.length; i++) {
       if (src[i] === '\\') {

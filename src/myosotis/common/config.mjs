@@ -12,11 +12,20 @@ export default {
     theme: {
       theme: 'light' // 主题 light dark
     },
-    disable: [], // 禁用组件、模板、模块的类名
+    disable: {
+      components: [],
+      templates: [],
+      modules: [],
+      labels: [],
+      grammars: []
+    }, // 禁用组件、模板、模块的类名
     custom: {
+      configurators: [], // 自定义配置项解析器
       components: [], // 自定义组件
       templates: [], // 自定义模板
-      modules: [] // 自定义模块
+      modules: [], // 自定义模块
+      labels: [], // 自定义标签
+      grammar: [] // 自定义语法
     }
   },
   option: {
@@ -124,5 +133,6 @@ export default {
       },
       classList: []
     }
-  }
+  },
+  type: [] // 给组件等类型后会在这里面进行寻找是否有符合的，进行赋值
 }

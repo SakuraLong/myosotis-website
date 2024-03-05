@@ -1,6 +1,6 @@
-import Template from './template.mjs'
+import TemplateRenderer from './template.mjs'
 
-class A extends Template {
+class A extends TemplateRenderer {
   static name = 'a'
   constructor(config, node, map, data) {
     super(config, node, map, data)

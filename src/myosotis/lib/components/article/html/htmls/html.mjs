@@ -2,6 +2,7 @@ import Renderer from '../renderer.mjs'
 
 class Html extends Renderer {
   static type = 'html'
+  static name = 'html'
   constructor(config, node, map, data) {
     super(config, node, map, data)
   }

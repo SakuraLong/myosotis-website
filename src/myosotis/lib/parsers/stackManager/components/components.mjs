@@ -9,6 +9,12 @@ class Components {
       Title,
       Paragraph
     ]
+    this.init()
+  }
+  init() {
+    this.config.setting.custom.components.forEach((comp) => {
+      this.parsers.push(comp.parser)
+    })
   }
   build(nodeStack, src, para = false) {
     if (src === '') return

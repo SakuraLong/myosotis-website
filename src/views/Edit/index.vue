@@ -37,6 +37,8 @@
 // import SakuraRenderer from '@/sakura-renderer'
 // import SakuraRenderer from '@/sakura-renderer-new'
 import Myosotis from '@/myosotis'
+import AudioShowerParser from './audioShowerParser.mjs'
+import AudioShowerRenderer from './audioShowerRenderer.mjs'
 export default {
   name: 'Edit',
   beforeRouteLeave(to, from, next) {
@@ -113,6 +115,8 @@ export default {
     render() {
       if (this.code !== '') {
         const myosotis = new Myosotis()
+        console.log(AudioShowerParser, AudioShowerRenderer)
+        myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
         myosotis.render(this.code, this.$refs.editShower)
         // SakuraRenderer.renderArticle(this.$refs.editShower, this.code)
         // const catalogue = new SakuraRenderer.Catalogue(this.$refs.cata)
@@ -146,7 +150,7 @@ export default {
         // })
         // renderer.bindCatalogue(catalogue)
         // renderer.setArticle(this.code)
-        console.log(new Date().getTime())
+        // console.log(new Date().getTime())
         // renderer.render({
         //   dom: this.$refs.editShower
         // }).then((res) => {

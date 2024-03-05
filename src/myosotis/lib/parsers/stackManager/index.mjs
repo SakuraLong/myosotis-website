@@ -77,6 +77,7 @@ class StackManager {
       }
     }
     const res = this.mergeStructure(article)
+    console.log(article)
     console.log(res)
     return res
   }

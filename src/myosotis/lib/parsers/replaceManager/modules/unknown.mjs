@@ -3,8 +3,8 @@ import Module from './module.mjs'
 class Unknown extends Module {
   constructor(config, replaceDict) {
     super('unknown', config, replaceDict)
-    this.nameList = ['unknown']
-    this.keyList = []
+    this._V_nameList = ['unknown']
+    this._V_keyList = []
   }
   static weight = 100000
   judge(contentList, content) {

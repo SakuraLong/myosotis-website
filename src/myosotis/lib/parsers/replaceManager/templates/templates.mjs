@@ -1,3 +1,6 @@
+// 模板控制替换器
+//
+
 import Replaces from '../replaces.mjs'
 import utils from '../../../../common/utils.mjs'
 
@@ -13,6 +16,11 @@ class Templates extends Replaces {
     ]
     this.init()
   }
+  /**
+   * 对字符串进行替换
+   * @param {String} src 待替换的字符串
+   * @returns 替换好的字符串
+   */
   replace(src) {
     let temp = ''
     while (temp !== src) {
@@ -22,7 +30,6 @@ class Templates extends Replaces {
         src,
         (data) => {
           const content = data.replace.slice(data.stringBegin.length, -data.stringEnd.length)
-          console.log(content)
           const contentList = content.split('|')
           for (const Parser of this.parsers) {
             const p = new Parser(this.config, this.replaceDict)

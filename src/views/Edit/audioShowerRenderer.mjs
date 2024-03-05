@@ -1,7 +1,7 @@
-import Template from './template.mjs'
+import Myosotis from '@/myosotis'
 
-class A extends Template {
-  static name = 'a'
+class AudioShowerRenderer extends Myosotis.ComponentRenderer {
+  static name = 'audioShower'
   constructor(config, node, map, data) {
     super(config, node, map, data)
   }
@@ -30,4 +30,4 @@ class A extends Template {
   }
 }
 
-export default A
+export default AudioShowerRenderer

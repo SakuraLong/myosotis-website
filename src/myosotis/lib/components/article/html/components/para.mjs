@@ -1,6 +1,6 @@
-import Component from './component.mjs'
+import ComponentRenderer from './component.mjs'
 
-class Paragraph extends Component {
+class Paragraph extends ComponentRenderer {
   static name = 'paragraph'
   constructor(config, node, map, data) {
     super(config, node, map, data)
@@ -52,7 +52,7 @@ class Paragraph extends Component {
     if (config.fontFamily !== 'DEFAULT') p.style.fontFamily = config.fontFamily
     if (config.fontSize !== 'DEFAULT') p.style.fontSize = config.fontSize
     /* ----- 标签结构构建 ----- */
-    console.log(config)
+    // console.log(config)
     if (config.type !== 'default') {
       divType.appendChild(pTitle)
       divType.appendChild(p)

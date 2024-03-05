@@ -1,12 +1,13 @@
-import Component from './component.mjs'
+import ComponentRenderer from './component.mjs'
 
-class Title extends Component {
+class Title extends ComponentRenderer {
   static name = 'title'
   constructor(config, node, map, data) {
     super(config, node, map, data)
   }
   _V_renderSelf() {
     const config = this.config
+    // console.log(config)
     /* ----- 组件标签定义 ----- */
     const h = document.createElement('h' + config.level.toString())
     const span = document.createElement('span')
@@ -40,7 +41,7 @@ class Title extends Component {
     const content = span.textContent
     const tid = config.id || content
     let i = 0
-    console.log(this.data.title)
+    // console.log(this.data.title)
     while (this.data.title.find((item) => item.id === tid + (i === 0 ? '' : '_' + i.toString())) !== undefined) {
       i++
     }

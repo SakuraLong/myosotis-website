@@ -5,35 +5,37 @@ class Component extends Node {
     super('component', name, src)
     this.config = config
     this.replaceManager = replaceManager
-    this.nameList = []
-    this.compConfig = [] // 组件设置
+    this.baseKey = this.baseKey.concat(
+      [
+        ['float',       'f',        'left',   'right',    'both',     'none',       'center',         ['none', 'center', 'left', 'right'],    'none'], // 浮动情况
+        ['clear',       'c',        ['none',  'center',   'left',     'right'],     'none'],          // clear情况
+        ['maxWidth',    'maxW',     null,     '100%'],                // 最大宽度
+        ['maxHeight',   'maxH',     null,     'none'],                // 最大高度
+        ['minWidth',    'minW',     null,     'none'],                // 最小宽度
+        ['minHeight',   'minH',     null,     'none'],                // 最小高度
+        ['width',       'w',        null,     'auto'],                // 宽度
+        ['height',      'h',        null,     'auto'],                // 高度
+        ['color',       null,       'DEFAULT'],                       // 文字颜色 DEFAULT则不设置
+        ['fontSize',    'FS',       null,     'DEFAULT'],             // 文字大小 同上
+        ['fontFamily',  'FF',       null,     'DEFAULT'],             // 字体 同上
+        ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(',').filter((value) => { return value !== '' }))], // 类名列表
+        ['styleList',   'style',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))], // 样式列表
+        ['baseURL',     null,       ''] // 基础路径
+      ]
+    )
     this.nodeConfig = {
-      key:        parseInt(Math.random() * 1000000),
-      float:      'none',       // 浮动情况
-      clear:      'none',       // clear情况
-      maxWidth:   '100%',       // 最大宽度
-      maxHeight:  'none',       // 最大高度
-      minWidth:   'none',       // 最小宽度
-      minHeight:  'none',       // 最小高度
-      width:      'auto',       // 宽度
-      height:     'auto',       // 高度
-      color:      'DEFAULT',    // 文字颜色
-      fontSize:   'DEFAULT',    // 文字大小 同上
-      fontFamily: 'DEFAULT',    // 字体 同上
-      classList:  [],           // 类名列表
-      style:      '',           // 样式列表
-      baseURL:    '',           // 基础路径
-      id:         ''            // 组件id
+      key:        parseInt(Math.random() * 1000000)
     }
-    this.configList = []
-    this.dataList = []
+    this.configList = [] // 组件设置区域
+    this.dataList = [] // 组件数据区域
     this.compInit()
   }
   compInit() {
-    const i = this.data.indexOf('-')
-    if (i === -1) this.dataList = this.data
+    const i = this.contentList.indexOf('-')
+    if (i === -1) this.dataList = this.contentList
     else {
-      this.data.forEach((d, index) => {
+      this.contentList.forEach((d, index) => {
+        if (index === 0) return
         if (index < i) this.configList.push(d)
         else if (index > i) this.dataList.push(d)
       })
@@ -59,7 +61,7 @@ class Component extends Node {
       data.status = -1
       return {
         match: true,
-        content: body.slice(data.startBegin + 2, i + 1 - 2)
+        content: body.slice(data.startBegin, i + 1)
       }
     } else {
       return {
@@ -67,129 +69,43 @@ class Component extends Node {
       }
     }
   }
-  judge() {
-    if (this.nameList.indexOf(this.data[0]) !== -1) {
-      return true
-    } else {
-      return false
-    }
-  }
   build(nodeStack) {
+    /**
+     * 检查前面是否有config
+     */
     this.checkConfig(nodeStack)
-    this.analyseConfig()
+    /**
+     * config设置
+     */
+    this.configAnalyse(this.configList, true)
+    /**
+     * 解析组件数据
+     */
     this.analyse()
+    /**
+     * 向组件树插入本组件
+     */
     nodeStack[nodeStack.length - 1].children.push(this.get())
   }
   checkConfig(nodeStack) {
-    // 检查前面是否有config
     let i = nodeStack[nodeStack.length - 1].children.length
     while (--i >= 0 && nodeStack[nodeStack.length - 1].children[i].type === 'config') {
       this.configList = this.configList.concat(nodeStack[nodeStack.length - 1].children[i].config.configList)
     }
   }
-  analyseConfig() {
-    this.updateCompConfig()
-    this.configList.forEach((config) => {
-      const key = config.split('=')[0]
-      const left = config.indexOf('=')
-      const value = config.slice(left + 1, config.length)
-      switch (key) {
-        case 'left':
-        case 'right':
-        case 'both':
-        case 'none':
-        case 'center':
-          if (key === value) this.updateConfig('float', key)
-          break
-        case 'float':
-        case 'f':
-          if (['none', 'center', 'left', 'right'].indexOf(value) !== -1) {
-            this.updateConfig('float', ['center', 'left', 'right', 'none'].find((ele) => { return ele === value }))
-          }
-          break
-        case 'clear':
-          if (['none', 'both', 'left', 'right'].indexOf(value) !== -1) {
-            this.updateConfig('clear', ['left', 'both', 'right', 'none'].find((ele) => { return ele === value }))
-          }
-          break
-        case 'c':
-          // c有可能是clear，也可以是color
-          if (['none', 'both', 'left', 'right'].indexOf(value) !== -1) {
-            this.updateConfig('clear', ['left', 'both', 'right', 'none'].find((ele) => { return ele === value }))
-          } else {
-            this.updateConfig('color', value)
-          }
-          break
-        case 'width':
-        case 'w':
-          this.updateConfig('width', value, '')
-          break
-        case 'height':
-        case 'h':
-          this.updateConfig('height', value, '')
-          break
-        case 'maxWidth':
-        case 'maxW':
-          this.updateConfig('maxWidth', value, '')
-          break
-        case 'maxHeight':
-        case 'maxH':
-          this.updateConfig('maxHeight', value, '')
-          break
-        case 'minWidth':
-        case 'minW':
-          this.updateConfig('minWidth', value, '')
-          break
-        case 'minHeight':
-        case 'minH':
-          this.updateConfig('minHeight', value, '')
-          break
-        case 'fontSize':
-        case 'FS':
-          this.updateConfig('fontSize', value, '')
-          break
-        case 'fontFamily':
-        case 'FF':
-          this.updateConfig('fontFamily', value, '')
-          break
-        case 'class':
-          if (value) {
-            this.nodeConfig.classList = this.nodeConfig.classList.concat(
-              value.split(',').filter((value) => { return value !== '' })
-            )
-          }
-          break
-        case 'style':
-          this.updateConfig('style', value)
-          break
-        case 'baseURL':
-          if (value) { this.updateConfig('baseURL', value) }
-          break
-        case 'id':
-          this.updateConfig('id', value)
-          break
-        default:
-          this._V_analyseConfig(key, value)
-      }
-    })
-  }
   analyse() {
+    /**
+     * 子类解析组件数据
+     */
     this._V_analyse()
-    // 处理children列表
+    /**
+     * 处理children列表
+     */
     this.replaceManager.restore(this.get())
-  }
-  _V_analyseConfig(key, value) {
-    // 重写
-    return
   }
   _V_analyse() {
     // 重写
     return
-  }
-  updateCompConfig() {
-    this.compConfig.forEach((c) => {
-      this.updateConfig(c[0], c[1])
-    })
   }
 }
 

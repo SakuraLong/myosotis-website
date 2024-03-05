@@ -1,14 +1,52 @@
 import Config from '../../common/config.mjs'
 import utils from '../../common/utils.mjs'
 
-class Configurator {
+import Configurator from './configurators/configurator.mjs'
+
+import TitleCfg from './configurators/title.mjs'
+
+class Configurators {
   constructor() {
     this.config = utils.deepClone(Config)
     this.defaultStatus = 'ART'
-    this.parsers = []
+    this.parsers = [
+      TitleCfg
+    ]
+    this.init()
+  }
+  init() {
+    this.config.setting.custom.configurators.forEach((configurator) => {
+      if (utils.check(configurator, Configurator, 'class')) this.parsers.push(configurator)
+    })
   }
   add(configurator, config) {
-    //
+    this.parsers.push(configurator)
+    this.config.option = Object.assign(this.config.option, config)
+  }
+  addParserAndRenderer(parser, renderer, type) {
+    const temp = {
+      parser: parser,
+      renderer: renderer
+    }
+    switch (type) {
+      case 'comp':
+        this.config.setting.custom.components.push(temp)
+        break
+      case 'temp':
+        this.config.setting.custom.templates.push(temp)
+        break
+      case 'modu':
+        this.config.setting.custom.modules.push(temp)
+        break
+      case 'gram':
+        this.config.setting.custom.grammars.push(temp)
+        break
+      case 'label':
+        this.config.setting.custom.labels.push(temp)
+        break
+      default:
+        break
+    }
   }
   get() {
     return this.config
@@ -86,4 +124,4 @@ class Configurator {
   }
 }
 
-export default Configurator
+export default Configurators

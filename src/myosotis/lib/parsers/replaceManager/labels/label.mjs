@@ -5,10 +5,9 @@ class Label extends Replace {
   constructor(name, config, replaceDict) {
     super('label', name, replaceDict)
     this.config = config
-    this.labelList = []
   }
   replace(src) {
-    this.labelList.forEach((label) => {
+    this._V_nameList.forEach((label) => {
       let temp = ''
       while (temp !== src) {
         temp = src
@@ -26,8 +25,11 @@ class Label extends Replace {
   }
   replaceLabel(data) {
     const content = data.replace.slice(data.stringBegin.length, -data.stringEnd.length)
-    this.replaceSelf(content)
-    const value = this.get()
+    this._V_replaceSelf(content)
+    /**
+     * 深拷贝节点信息
+     */
+    const value = utils.deepClone(this.get())
     const textNode = this.createTextNode(value.content)
     value.children.push(textNode)
     const key = this.getReplaceStr()

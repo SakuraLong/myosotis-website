@@ -1,4 +1,5 @@
 import Replace from '../replace.mjs'
+import utils from '../../../../common/utils.mjs'
 
 class Grammar extends Replace {
   constructor(name, config, replaceDict) {
@@ -6,7 +7,7 @@ class Grammar extends Replace {
     this.config = config
     this.regex = null
   }
-  replaceSelf(content, i) {
+  _V_replaceSelf(content, i) {
     this.content = this.regex.exec(content)[1]
   }
   replace(src) {
@@ -14,8 +15,12 @@ class Grammar extends Replace {
     while (this.regex.test(src) && ++h < 5) {
       const list = src.match(this.regex)
       list.forEach((l, i) => {
-        this.replaceSelf(l, i)
-        const value = this.get()
+        this.regex.lastIndex = 0
+        this._V_replaceSelf(l, i)
+        /**
+         * 深拷贝节点信息
+         */
+        const value = utils.deepClone(this.get())
         const textNode = this.createTextNode(value.content)
         value.children.push(textNode)
         const key = this.getReplaceStr()

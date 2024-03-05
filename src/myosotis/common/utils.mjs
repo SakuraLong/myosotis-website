@@ -236,9 +236,19 @@ function replaceGreed(string_begin, string_end, content, func) {
   return res
 }
 
+const check = (ele, judge = null, type = null) => {
+  switch (type) {
+    case null:
+      return ele !== null && ele !== undefined
+    case 'class':
+      return ele !== null && judge !== null ? Object.getPrototypeOf(ele.prototype) === judge.prototype : false
+  }
+}
+
 export default {
   deepClone,
   mergeObjects,
   replaceNonGreed,
-  replaceGreed
+  replaceGreed,
+  check
 }

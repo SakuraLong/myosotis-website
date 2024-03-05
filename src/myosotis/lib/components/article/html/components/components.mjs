@@ -9,6 +9,12 @@ class Components extends MapBuilder {
       Title,
       Paragraph
     ]
+    this.init()
+  }
+  init() {
+    this.config.setting.custom.components.forEach((comp) => {
+      this.renderers.push(comp.renderer)
+    })
   }
 }
 

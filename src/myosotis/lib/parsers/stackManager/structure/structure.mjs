@@ -5,21 +5,35 @@ class Structure extends Node {
     super('structure', 'structure', src)
     this.config = config
     this.nodeConfig = {
-      maxWidth:   '100%',       // 最大宽度
-      maxHeight:  'none',       // 最大高度
-      minWidth:   'none',       // 最小宽度
-      minHeight:  'none',       // 最小高度
-      width:      'auto',       // 宽度
-      height:     'auto',       // 高度
-      color:      'DEFAULT',    // 文字颜色
-      fontSize:   'DEFAULT',    // 文字大小 同上
-      fontFamily: 'DEFAULT',    // 字体 同上
-      type:       'structure',  // 类型
-      pos:        'begin',      // 结构开始还是结构结束
-      classList:  [],           // 类名列表
-      style:      ''            // 样式
+      type:       'structure'
     }
+    this.baseKey = this.baseKey.concat(
+      [
+        ['float',       'f',        'left', 'right', 'both', 'none', 'center', ['none', 'center', 'left', 'right'],    'none'],
+        ['clear',       'c',        ['none', 'center', 'left', 'right'],    'none'],
+        ['maxWidth',    'maxW',     null,     '100%'],
+        ['maxHeight',   'maxH',     null,     'none'],
+        ['minWidth',    'minW',     null,     'none'],
+        ['minHeight',   'minH',     null,     'none'],
+        ['width',       'w',        null,     'auto'],
+        ['height',      'h',        null,     'auto'],
+        ['color',       null,       'DEFAULT'],
+        ['fontSize',    'FS',       null,     'DEFAULT'],
+        ['fontFamily',  'FF',       null,     'DEFAULT'],
+        ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(',').filter((value) => { return value !== '' }))],
+        ['styleList',   'style',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))],
+        ['pos',         'begin',    'end',    '开始', '结束',     null,   'begin',    this.analysePos]
+      ]
+    )
     this.replaceManager = replaceManager
+  }
+  analysePos(key, value, configValue) {
+    return {
+      'begin': 'begin',
+      '开始': 'begin',
+      'end': 'end',
+      '结束': 'end'
+    }[key]
   }
   static begin(i, body, data, index) {
     if (body[i] === '{' && i < body.length - 1 && body[i + 1] === '(' && (i === 0 || (i > 0 && body[i - 1] === '\n'))) {
@@ -41,7 +55,7 @@ class Structure extends Node {
       data.status = -1
       return {
         match: true,
-        content: body.slice(data.startBegin + 2, i + 1 - 2)
+        content: body.slice(data.startBegin, i + 1)
       }
     } else {
       return {
@@ -52,76 +66,16 @@ class Structure extends Node {
   build(nodeStack = null) {
     if (nodeStack === null) {
       // 初始化
+      this.configAnalyse([], true)
       this.updateConfig('type', 'article')
       return this.get()
     } else {
-      this.analyse()
+      /**
+     * config设置
+     */
+      this.configAnalyse(this.contentList, true)
       nodeStack[nodeStack.length - 1].children.push(this.get())
     }
-  }
-  analyse() {
-    this.data.forEach((d) => {
-      const key = d.split('=')[0]
-      const left = d.indexOf('=')
-      const value = d.slice(left + 1, d.length)
-      switch (key) {
-        case 'begin':
-        case 'end':
-        case '开始':
-        case '结束':
-          this.updateConfig('pos', {
-            'begin': 'begin',
-            '开始': 'begin',
-            'end': 'end',
-            '结束': 'end'
-          }[key])
-          break
-        case 'class':
-          if (value) {
-            this.nodeConfig.classList = this.nodeConfig.classList.concat(
-              value.split(',').filter((value) => { return value !== '' })
-            )
-          }
-          break
-        case 'style':
-          this.updateConfig('style', value)
-          break
-        case 'width':
-        case 'w':
-          this.updateConfig('width', value)
-          break
-        case 'height':
-        case 'h':
-          this.updateConfig('height', value)
-          break
-        case 'maxWidth':
-        case 'maxW':
-          this.updateConfig('maxWidth', value)
-          break
-        case 'maxHeight':
-        case 'maxH':
-          this.updateConfig('maxHeight', value)
-          break
-        case 'minWidth':
-        case 'minW':
-          this.updateConfig('minWidth', value)
-          break
-        case 'minHeight':
-        case 'minH':
-          this.updateConfig('minHeight', value)
-          break
-        case 'fontSize':
-        case 'FS':
-          this.updateConfig('fontSize', value)
-          break
-        case 'fontFamily':
-        case 'FF':
-          this.updateConfig('fontFamily', value)
-          break
-        default:
-          break
-      }
-    })
   }
 }
 

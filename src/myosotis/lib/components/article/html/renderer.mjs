@@ -16,7 +16,7 @@ class Renderer {
   }
   renderChildren(parent, node) {
     node.children.forEach((child) => {
-      console.log(child.type, child.name)
+      // console.log(child.type, child.name)
       const ChildRenderer = this.map.get(child.type).get(child.name)
       const childRenderer = new ChildRenderer(child.config, child, this.map, this.data)
       const res = childRenderer.render()

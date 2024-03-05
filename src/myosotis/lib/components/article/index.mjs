@@ -4,8 +4,11 @@ import Labels from './html/labels/labels.mjs'
 import Texts from './html/text/texts.mjs'
 import Templates from './html/templates/templates.mjs'
 import Htmls from './html/htmls/htmls.mjs'
+import Grammars from './html/grammars/grammars.mjs'
 
 import Structure from './html/structures/structure.mjs'
+
+import EventManager from '../../managers/eventManager/index.mjs'
 
 class Article {
   constructor(config, tree, parent, catalogue = null) {
@@ -14,17 +17,19 @@ class Article {
     this.parent = parent
     this.catalogue = catalogue
     this.map = new Map()
-    this.eventManager = null // 事件管理器
+    this.eventManager = new EventManager() // 事件管理器
     this.renderersList = [
       Components,
       Structures,
       Texts,
       Templates,
       Labels,
-      Htmls
+      Htmls,
+      Grammars
     ]
     this.data = {
-      title: []
+      title: [],
+      eventManager: this.eventManager
     }
     this.init()
   }
@@ -39,6 +44,9 @@ class Article {
     this.parent.innerHTML = ''
     this.parent.appendChild(article)
     console.log(article)
+  }
+  close() {
+    if (this.eventManager) this.eventManager.close()
   }
 }
 

@@ -1,12 +1,14 @@
 import Replaces from '../replaces.mjs'
 
 import Ignore from './ignore.mjs'
+import Poem from './poem.mjs'
 
 class Labels extends Replaces {
   constructor(config, replaceDict) {
     super(config, replaceDict)
     this.parsers = [
-      Ignore
+      Ignore,
+      Poem
     ]
     this.before = []
     this.after = []

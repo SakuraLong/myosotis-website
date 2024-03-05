@@ -1,17 +1,17 @@
-import LabelRenderer from './label.mjs'
+import GrammarRenderer from './grammar.mjs'
 
-class Ignore extends LabelRenderer {
-  static name = 'ignore'
+class Del extends GrammarRenderer {
+  static name = 'del'
   constructor(config, node, map, data) {
     super(config, node, map, data)
   }
   _V_renderSelf() {
     const config = this.config
     /* ----- 组件标签定义 ----- */
-    const span = document.createElement('span')
+    const del = document.createElement('del')
     /* ----- 标签类设置 ----- */
     /* ----- 组件子元素加入 ----- */
-    span.textContent = this.node.content
+    del.textContent = this.node.content
     /* ----- 组件信息计算 ----- */
     /* ----- 标签attr设置 ----- */
     /* ----- 标签style设置 ----- */
@@ -19,9 +19,9 @@ class Ignore extends LabelRenderer {
     /* ----- 返回组件信息 ----- */
     return {
       text: false,
-      element: span
+      element: del
     }
   }
 }
 
-export default Ignore
+export default Del

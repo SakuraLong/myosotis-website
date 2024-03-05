@@ -38,7 +38,7 @@ class Config extends Node {
     }
   }
   build(nodeStack) {
-    this.updateConfig('configList', this.data)
+    this.updateConfig('configList', this.contentList)
     nodeStack[nodeStack.length - 1].children.push(this.get())
   }
 }

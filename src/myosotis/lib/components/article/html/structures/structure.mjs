@@ -7,7 +7,13 @@ class Structure extends Renderer {
     super(config, node, map, data)
   }
   _V_renderSelf() {
+    const config = this.config
     const div = document.createElement('div')
+
+    config.classList.forEach((className) => {
+      div.classList.add(className)
+    })
+
     this.renderChildren(div, this.node)
     return {
       text: false,
