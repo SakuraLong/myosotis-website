@@ -1,0 +1,4 @@
+.my-structure--article {
+    padding: 2rem;
+    width: calc(100% - 4rem);
+}

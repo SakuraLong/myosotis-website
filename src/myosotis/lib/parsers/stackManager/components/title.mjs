@@ -13,7 +13,8 @@ class Title extends Component {
     ]
   }
   _V_defaultConfigAnalyse(key, value, configValue) {
-    if (key.startWith('h')) {
+    console.log(key, this.configList)
+    if (key.startsWith('h')) {
       try {
         const res = parseInt(key[1])
         return {

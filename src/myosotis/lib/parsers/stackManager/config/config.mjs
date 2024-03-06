@@ -38,6 +38,13 @@ class Config extends Node {
     }
   }
   build(nodeStack) {
+    /**
+     * config不需要去掉头尾两个字符串
+     */
+    this.contentList = this.sourceContent.split('|')
+    for (let i = 0; i < this.contentList.length; i++) {
+      this.contentList[i] = this.contentList[i].trim()
+    }
     this.updateConfig('configList', this.contentList)
     nodeStack[nodeStack.length - 1].children.push(this.get())
   }

@@ -1,6 +1,10 @@
 import utils from '../../common/utils.mjs'
 
 /**
+ * 组件树节点基类
+ */
+
+/**
  * {
  *  type: String,
  *  name: String,
@@ -13,14 +17,32 @@ import utils from '../../common/utils.mjs'
 
 class Token {
   constructor(type, name) {
+    /**
+     * 节点类型
+     */
     this.type = type
+    /**
+     * 节点名字
+     */
     this.name = name
+    /**
+     * 节点level
+     */
     this.level = 0
+    /**
+     * 节点配置项
+     */
     this.nodeConfig = {}
+    /**
+     * 节点纯文本
+     */
     this.content = ''
+    /**
+     * 节点的子节点
+     */
     this.children = []
     /**
-     * 模板的键值对
+     * 节点的键值对
      * 子类如有需要，需要重写
      * _V_keyList的元素示例如下：
      * [keyConfig, key2, key3, ..., keyn, allowedValues, defalutValue, analyseFunc(可选)]
@@ -37,6 +59,7 @@ class Token {
      */
     this.baseKey = [
       ['TYPE',    null,       ''],
+      ['ID',    null,       ''],
       ['id',      null,       '']
     ]
     /**
@@ -45,15 +68,7 @@ class Token {
      */
     this._V_nameList = []
     /**
-     * 根据 | 拆分后的数据列表
-     */
-    // this.contentList = []
-    /**
-     * 去除{{}}的内容
-     */
-    // this.sourceContent = ''
-    /**
-     * 当值不需要进行修改时，返回这个值
+     * 判断值是否改变
      */
     this.NOT_CHANGE_VALUE = 'ASCSAPJVAONV0&^$^*30+_)**ggf^f$^dyv#$%^dlnlnBSDVNL;SDV'
   }
@@ -142,11 +157,20 @@ class Token {
   }
 
   /**
+   * 使用config修改默认配置项
+   * @returns null
+   */
+  useConfigInit() {
+    return
+  }
+
+  /**
    * 处理模板用户设置的内容
    * @param {Boolean} noneIndex 是否使用index确认value的key
    */
   configAnalyse(configList, noneIndex = false) {
     this.configInit()
+    this.useConfigInit()
     /**
      * 根据键值对更新config
      * @param {String} key 键（=左侧）
@@ -157,18 +181,21 @@ class Token {
       let hasFunc = false
       const keyList = this._V_keyList.find((item) => {
         if (typeof item[item.length - 1] === 'function') {
-          hasFunc = true
-          return utils.deepClone(item).splice(0, item.length - 3).indexOf(key) !== -1
+          const res = utils.deepClone(item).splice(0, item.length - 3).indexOf(key) !== -1
+          if (res) hasFunc = true
+          return res
         } else {
           return utils.deepClone(item).splice(0, item.length - 2).indexOf(key) !== -1
         }
       })
+      console.log(keyList, hasFunc, key, value)
       if (keyList !== undefined) {
         const v = hasFunc ? keyList[keyList.length - 1].call(this, key, value, this.nodeConfig[keyList[0]]) : value
         const j = hasFunc ? keyList[keyList.length - 3] : keyList[keyList.length - 2]
         if (v === this.NOT_CHANGE_VALUE) return true
         if (j === null || j.indexOf(v) !== -1) {
-          this.updateConfig(keyList[0], value)
+          console.log('updateConfig')
+          this.updateConfig(keyList[0], v)
           return true
         } else {
           return false
@@ -180,23 +207,37 @@ class Token {
       const left = data.indexOf('=')
       const value = data.slice(left + 1, data.length)
       const keyList = this._V_keyList[index] // noneIndex 为 false
+
       if (switchKeyValue(key, value)) {
+        /**
+         * 匹配到满足要求的键值对
+         */
         return
       } else {
         if (noneIndex) {
+        /**
+         * 当前是不用index确定value的
+         */
           const res = this._V_defaultConfigAnalyse(key, value, this.nodeConfig[key])
           if (res.res !== this.NOT_CHANGE_VALUE) this.updateConfig(res.key, res.res)
         } else {
+          /**
+           * 当前用index确定value
+           */
           if (keyList === undefined) {
             const res = this._V_defaultIndexConfigAnalyse(key, value, undefined)
             if (res.res !== this.NOT_CHANGE_VALUE) this.updateConfig(res.key, res.res)
           } else {
+            /**
+             * 为了保留数据的完整性，此处需要用data赋值
+             */
             this.updateConfig(keyList[0], data)
           }
         }
       }
     })
   }
+
   /**
    * 该函数仅在configAnalyse函数noneIndex值为true时有用
    * 也就是该函数仅在组件、结构中有意义
@@ -205,13 +246,14 @@ class Token {
    * @param {String} key 键
    * @param {String} value 值
    * @param {*} configValue config中键对应的值
-   * @returns 需要赋值的值，如果不需要改变则返回 this.NOT_CHANGE_VALUE
+   * @returns 需要赋值的值，返回的是对象，如果不需要改变则返回 this.NOT_CHANGE_VALUE
    */
   _V_defaultConfigAnalyse(key, value, configValue) {
     return {
       res: this.NOT_CHANGE_VALUE
     }
   }
+
   /**
    * 该函数仅在configAnalyse函数noneIndex值为false时有用
    * 也就是该函数仅在组件、结构中有意义
@@ -220,7 +262,7 @@ class Token {
    * @param {String} key 键
    * @param {String} value 值
    * @param {*} configValue config中键对应的值
-   * @returns 需要赋值的值，如果不需要改变则返回 this.NOT_CHANGE_VALUE
+   * @returns 需要赋值的值，返回的是对象，如果不需要改变则返回 this.NOT_CHANGE_VALUE
    */
   _V_defaultIndexConfigAnalyse(key, value, configValue) {
     return {

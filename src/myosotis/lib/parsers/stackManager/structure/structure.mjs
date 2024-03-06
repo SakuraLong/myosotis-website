@@ -20,7 +20,7 @@ class Structure extends Node {
         ['color',       null,       'DEFAULT'],
         ['fontSize',    'FS',       null,     'DEFAULT'],
         ['fontFamily',  'FF',       null,     'DEFAULT'],
-        ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(',').filter((value) => { return value !== '' }))],
+        ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))],
         ['styleList',   'style',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))],
         ['pos',         'begin',    'end',    '开始', '结束',     null,   'begin',    this.analysePos]
       ]

@@ -3,7 +3,7 @@ import GrammarRenderer from './grammar.mjs'
 class Del extends GrammarRenderer {
   static name = 'del'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super('del', config, node, map, data)
   }
   _V_renderSelf() {
     const config = this.config

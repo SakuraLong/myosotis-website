@@ -4,7 +4,7 @@ class Text extends Renderer {
   static type = 'text'
   static name = 'text'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super(config, node, map, data, 'text', 'text')
   }
   _V_renderSelf() {
     return {

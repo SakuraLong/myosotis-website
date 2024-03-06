@@ -4,7 +4,7 @@ class Html extends Renderer {
   static type = 'html'
   static name = 'html'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super(config, node, map, data, 'html', 'html')
   }
   _V_renderSelf() {
     const config = this.config

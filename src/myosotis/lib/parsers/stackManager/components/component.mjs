@@ -7,8 +7,8 @@ class Component extends Node {
     this.replaceManager = replaceManager
     this.baseKey = this.baseKey.concat(
       [
-        ['float',       'f',        'left',   'right',    'both',     'none',       'center',         ['none', 'center', 'left', 'right'],    'none'], // 浮动情况
-        ['clear',       'c',        ['none',  'center',   'left',     'right'],     'none'],          // clear情况
+        ['float',       'f',        'left',   'right',    'none',     'center',     ['none', 'center', 'left', 'right'],    'none'], // 浮动情况
+        ['clear',       'c',        ['none',  'center',   'left',     'right',      'both'],          'none'],          // clear情况
         ['maxWidth',    'maxW',     null,     '100%'],                // 最大宽度
         ['maxHeight',   'maxH',     null,     'none'],                // 最大高度
         ['minWidth',    'minW',     null,     'none'],                // 最小宽度
@@ -18,7 +18,7 @@ class Component extends Node {
         ['color',       null,       'DEFAULT'],                       // 文字颜色 DEFAULT则不设置
         ['fontSize',    'FS',       null,     'DEFAULT'],             // 文字大小 同上
         ['fontFamily',  'FF',       null,     'DEFAULT'],             // 字体 同上
-        ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(',').filter((value) => { return value !== '' }))], // 类名列表
+        ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))], // 类名列表
         ['styleList',   'style',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))], // 样式列表
         ['baseURL',     null,       ''] // 基础路径
       ]
@@ -89,9 +89,13 @@ class Component extends Node {
   }
   checkConfig(nodeStack) {
     let i = nodeStack[nodeStack.length - 1].children.length
+    let temp = []
     while (--i >= 0 && nodeStack[nodeStack.length - 1].children[i].type === 'config') {
-      this.configList = this.configList.concat(nodeStack[nodeStack.length - 1].children[i].config.configList)
+      console.log(nodeStack[nodeStack.length - 1].children[i])
+      temp = temp.concat(nodeStack[nodeStack.length - 1].children[i].config.configList)
     }
+    temp = temp.reverse()
+    this.configList = this.configList.concat(temp)
   }
   analyse() {
     /**

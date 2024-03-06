@@ -3,8 +3,9 @@ import ComponentRenderer from './component.mjs'
 class Paragraph extends ComponentRenderer {
   static name = 'paragraph'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super('paragraph', config, node, map, data)
   }
+
   _V_renderSelf() {
     const config = this.config
     /* ----- 组件标签定义 ----- */

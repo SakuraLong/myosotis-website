@@ -57,7 +57,7 @@ export default {
       code: '= Hello world',
       allowCtrlS: true,
       showCata: true,
-      renderer: null
+      myosotis: null
     }
   },
   mounted() {
@@ -72,7 +72,7 @@ export default {
     this.render()
   },
   beforeUnmount() {
-    // this.renderer.destroy()
+    this.myosotis.close()
     window.removeEventListener('beforeunload', this.beforeunload)
     document.removeEventListener('keydown', this.keydown)
     window.scrollTo(0, 0)
@@ -114,10 +114,27 @@ export default {
     },
     render() {
       if (this.code !== '') {
-        const myosotis = new Myosotis()
+        new Myosotis.FontsLoader([
+          {
+            name: 'exo-light',
+            src: 'url(static/Fonts/Exo-Light.ttf)'
+          },
+          {
+            name: 'geosans',
+            src: 'url(' + require('./GeosansLight.ttf') + ')'
+          }
+        ])
+        const myosotis = new Myosotis({
+          setting: {
+            preview: {
+              preview: false
+            }
+          }
+        })
         console.log(AudioShowerParser, AudioShowerRenderer)
         myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
         myosotis.render(this.code, this.$refs.editShower)
+        this.myosotis = myosotis
         // SakuraRenderer.renderArticle(this.$refs.editShower, this.code)
         // const catalogue = new SakuraRenderer.Catalogue(this.$refs.cata)
         // const renderer = SakuraRenderer.createRenderer(this.$refs.editShower)

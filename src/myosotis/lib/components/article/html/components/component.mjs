@@ -2,8 +2,8 @@ import Renderer from '../renderer.mjs'
 
 class ComponentRenderer extends Renderer {
   static type = 'component'
-  constructor(config, node, map, data) {
-    super(config, node, map, data)
+  constructor(name, config, node, map, data) {
+    super(config, node, map, data, 'component', name)
   }
 }
 

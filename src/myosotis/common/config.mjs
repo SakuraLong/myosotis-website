@@ -5,7 +5,7 @@ export default {
     },
     preview: {
       preview: false, // 是否是预览 true false
-      viewContent: 'paragraph', // 预览内容 paragraph component words
+      viewType: 'component', // 预览内容 paragraph component words
       viewAmount: 2, // 预览内容数量 0 ~ +∞
       catalogue: false // 预览模式是否显示目录 true false
     },
@@ -134,5 +134,5 @@ export default {
       classList: []
     }
   },
-  type: [] // 给组件等类型后会在这里面进行寻找是否有符合的，进行赋值
+  type: {} // 给组件等类型后会在这里面进行寻找是否有符合的，进行赋值
 }

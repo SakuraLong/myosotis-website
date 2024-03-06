@@ -1,10 +1,26 @@
 import ComponentRenderer from './component.mjs'
 
 class Title extends ComponentRenderer {
+  /**
+   * 渲染数据注册
+   * 如果组件希望有全局的数据，则可以在此注册
+   */
+  static data = {
+    title: []
+  }
+  /**
+   * 组件名字
+   * 必须与parser里面写的一样
+   */
   static name = 'title'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super('title', config, node, map, data)
   }
+
+  /**
+   * 渲染函数
+   * @returns 对象 text: Boolean 是否是text true会使用append将element插入挂载元素 false会使用appendChild将element插入挂载元素
+   */
   _V_renderSelf() {
     const config = this.config
     // console.log(config)
@@ -37,11 +53,12 @@ class Title extends ComponentRenderer {
     })
     /* ----- 组件子元素加入 ----- */
     this.renderChildren(span, this.node)
+    a.textContent = '#'
     /* ----- 组件信息计算 ----- */
     const content = span.textContent
     const tid = config.id || content
     let i = 0
-    // console.log(this.data.title)
+    console.log(this.data.title)
     while (this.data.title.find((item) => item.id === tid + (i === 0 ? '' : '_' + i.toString())) !== undefined) {
       i++
     }
@@ -58,8 +75,7 @@ class Title extends ComponentRenderer {
     a.setAttribute('href', '#' + id)
     a.setAttribute('aria-hidden', true)
     /* ----- 标签style设置 ----- */
-    if (config.color !== 'DEFAULT' && config.color !== '') h.style.color = config.color
-    if (config.fontFamily !== 'DEFAULT' && config.fontFamily !== '') h.style.fontFamily = config.fontFamily
+    this.setStyle(h, config)
     /* ----- 标签结构构建 ----- */
     h.appendChild(span)
     if (config.hasLink) h.appendChild(a)

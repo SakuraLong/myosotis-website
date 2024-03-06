@@ -4,12 +4,14 @@ class Structure extends Renderer {
   static type = 'structure'
   static name = 'structure'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super(config, node, map, data, 'structure', 'structure')
   }
   _V_renderSelf() {
     const config = this.config
     const div = document.createElement('div')
-
+    if (config.type === 'article') {
+      div.classList.add('my-structure--article')
+    }
     config.classList.forEach((className) => {
       div.classList.add(className)
     })

@@ -3,7 +3,7 @@ import LabelRenderer from './label.mjs'
 class Ignore extends LabelRenderer {
   static name = 'ignore'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super('ignore', config, node, map, data)
   }
   _V_renderSelf() {
     const config = this.config

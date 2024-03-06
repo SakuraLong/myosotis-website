@@ -1,23 +1,48 @@
+/**
+ * 导入样式
+ */
 import '../common/theme-chalk'
-
+/**
+ * 导入辅助函数、配置项解析器、语法分析器
+ */
 import Assistant from './assistants/index.mjs'
 import Configurators from './configurators/index.mjs'
 import Parser from './parsers/index.mjs'
-
+/**
+ * 导入配置项解析器基类
+ */
 import Configurator from './configurators/configurators/configurator.mjs'
-
+/**
+ * 导入组件基类
+ * 导入模板基类
+ * 导入模块基类
+ * 导入语法基类
+ * 导入标签基类
+ */
 import Component from './parsers/stackManager/components/component.mjs'
 import Template from './parsers/replaceManager/templates/template.mjs'
 import Module from './parsers/replaceManager/modules/module.mjs'
 import Grammar from './parsers/replaceManager/grammars/grammar.mjs'
 import Label from './parsers/replaceManager/labels/label.mjs'
-
+/**
+ * 导入组件渲染器基类
+ * 导入模板渲染器基类
+ * 导入标签渲染器基类
+ */
 import ComponentRenderer from './components/article/html/components/component.mjs'
 import TemplateRenderer from './components/article/html/templates/template.mjs'
 import LabelRenderer from './components/article/html/labels/label.mjs'
-
+/**
+ * 导入文章渲染器
+ */
 import Article from './components/article/index.mjs'
-
+/**
+ * 导入字体加载器
+ */
+import FontsLoader from './loaders/fontsLoader.mjs'
+/**
+ * 导入utils
+ */
 import utils from '../common/utils.mjs'
 
 class Myosotis {
@@ -33,18 +58,42 @@ class Myosotis {
   static TemplateRenderer = TemplateRenderer
   static LabelRenderer = LabelRenderer
 
+  static FontsLoader = FontsLoader
+
   constructor(option, userData) {
+    /**
+     * 用户设置的自定义可选项
+     */
     this.option = option || {}
+    /**
+     * 用户设置的userData
+     */
     this.userData = userData || {}
+    /**
+     * 配置项解析器
+     */
     this.configurators = new Configurators()
+    /**
+     * 辅助函数存储器
+     */
     this.assistant = new Assistant()
+    /**
+     * 文章对象
+     */
     this.article = null
+    /**
+     * 目录对象
+     */
     this.catalogue = null
+    /**
+     * 配置项
+     */
     this.config = {}
   }
   init() {
     //
   }
+
   /**
    * Myosotis.addComponent(component, componentRenderer [, componentCfg, config]) -> Boolean
    * - component (Component): component parser(inherited from Component) Component
@@ -55,10 +104,11 @@ class Myosotis {
   addComponent(component, componentRenderer, componentCfg = null, config = null) {
     if (!utils.check(component, Component, 'class')) return this
     if (!utils.check(componentRenderer, ComponentRenderer, 'class')) return this
+
     if (!utils.check(componentCfg, Configurator, 'class') && !utils.check(config)) {
       this.configurators.add(componentCfg, config)
     }
-    console.log('addComponent')
+
     this.configurators.addParserAndRenderer(component, componentRenderer, 'comp')
     return this
   }
@@ -66,6 +116,7 @@ class Myosotis {
   addTemplate(template, templateRenderer) {
     if (!utils.check(template, Template, 'class')) return this
     if (!utils.check(templateRenderer, TemplateRenderer, 'class')) return this
+
     this.configurators.addParserAndRenderer(template, templateRenderer, 'temp')
     return this
   }

@@ -6,8 +6,17 @@ import ReplaceManager from './replaceManager/index.mjs'
 
 class Parser {
   constructor(config, article, data) {
+    /**
+     * 完整的配置项
+     */
     this.config = config
+    /**
+     * 文章内容
+     */
     this.article = article
+    /**
+     * 一些数据，暂留，不一定有用
+     */
     this.data = data
     /**
      * StackManager 栈控制器
