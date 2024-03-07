@@ -84,9 +84,10 @@ export default {
       hoverAnimation: false, // hover动画
       hasLink: true, // 有无页面内跳转链接
       font: {
-        family: '',
-        color: ''
+        family: 'DEFAULT',
+        size: 'DEFAULT'
       },
+      color: 'DEFAULT',
       classList: []
     },
     paragraph: {

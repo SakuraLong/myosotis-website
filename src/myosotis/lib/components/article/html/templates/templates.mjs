@@ -9,6 +9,12 @@ class Templates extends MapBuilder {
       Unknown,
       A
     ]
+    this.init()
+  }
+  init() {
+    this.config.setting.custom.templates.forEach((temp) => {
+      this.renderers.push(temp.renderer)
+    })
   }
 }
 

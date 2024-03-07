@@ -52,11 +52,11 @@ class Replace extends Token {
     // 处理模板用户设置的内容
     this.configAnalyse(this.contentList)
     // 后处理确定content
-    this._V_afterReplace()
+    const needPush = this._V_afterReplace()
     // 获取自身节点
     const value = this.get()
     // 用自身content内容创建文本节点
-    if (this.content !== '') {
+    if (this.content !== '' && needPush) {
       const textNode = this.createTextNode(value.content)
       value.children.push(textNode)
     }
@@ -73,10 +73,10 @@ class Replace extends Token {
    * 模板模块可以用
    * 后处理确定content函数
    * 模板模块可以选择重写
-   * @returns 不需要返回
+   * @returns 是否需要push textNode
    */
   _V_afterReplace() {
-    return
+    return true
   }
 
   /**

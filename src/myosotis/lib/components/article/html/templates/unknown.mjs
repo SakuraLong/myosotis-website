@@ -3,7 +3,7 @@ import Template from './template.mjs'
 class Unknown extends Template {
   static name = 'unknown'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super('unknown', config, node, map, data)
   }
   _V_renderSelf() {
     const config = this.config

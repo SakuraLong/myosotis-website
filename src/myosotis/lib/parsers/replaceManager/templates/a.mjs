@@ -12,6 +12,7 @@ class A extends Template {
   }
   _V_afterReplace() {
     this.content = this.nodeConfig.content === '' ? this.nodeConfig.href : this.nodeConfig.content
+    return true
   }
 }
 

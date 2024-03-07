@@ -38,7 +38,7 @@
         </div>
         <div class="nav-bar__item github-button-container right-item">
           <a
-            href="https://github.com/SakuraLong/sakuraRenderer"
+            href="https://github.com/SakuraLong/myosotis-website"
             target="_blank"
           >仓库</a>
           <!-- <span>仓库</span> -->

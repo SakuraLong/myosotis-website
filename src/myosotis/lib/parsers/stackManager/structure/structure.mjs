@@ -22,7 +22,9 @@ class Structure extends Node {
         ['fontFamily',  'FF',       null,     'DEFAULT'],
         ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))],
         ['styleList',   'style',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))],
-        ['pos',         'begin',    'end',    '开始', '结束',     null,   'begin',    this.analysePos]
+        ['pos',         'begin',    'end',    '开始', '结束',     null,   'begin',    this.analysePos],
+        ['container',   null,       false,    (key, value, configValue) => ['true', 'false'].indexOf(value) !== -1 ? eval(value) : key === value ? true : this.NOT_CHANGE_VALUE],
+        ['card',        null,       false,    (key, value, configValue) => ['true', 'false'].indexOf(value) !== -1 ? eval(value) : key === value ? true : this.NOT_CHANGE_VALUE]
       ]
     )
     this.replaceManager = replaceManager

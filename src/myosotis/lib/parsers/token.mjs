@@ -59,7 +59,7 @@ class Token {
      */
     this.baseKey = [
       ['TYPE',    null,       ''],
-      ['ID',    null,       ''],
+      ['ID',      null,       ''],
       ['id',      null,       '']
     ]
     /**
@@ -71,6 +71,10 @@ class Token {
      * 判断值是否改变
      */
     this.NOT_CHANGE_VALUE = 'ASCSAPJVAONV0&^$^*30+_)**ggf^f$^dyv#$%^dlnlnBSDVNL;SDV'
+    /**
+     * 是否替换掉换行符
+     */
+    this.replaceLineBreak = true
   }
 
   /**
@@ -94,10 +98,10 @@ class Token {
    * @param {String} tn 类型与名字
    * @returns 相对节点
    */
-  create(content, tn) {
+  create(content, t, n = null) {
     return {
-      type:       tn,
-      name:       tn,
+      type:       t,
+      name:       n || t,
       level:      0,
       config:     {},
       content:    content,
@@ -150,10 +154,15 @@ class Token {
    * 之后加入模板的节点config中
    */
   configInit() {
+    this._V_keyList.forEach((key) => {
+      const res = this.baseKey.find((item) => item[0] === key[0])
+      if (res !== undefined) this.baseKey.splice(this.baseKey.indexOf(res), 1)
+    })
     this._V_keyList = this._V_keyList.concat(this.baseKey)
     this._V_keyList.forEach((key) => {
       this.updateConfig(key[0], typeof key[key.length - 1] === 'function' ? key[key.length - 2] : key[key.length - 1])
     })
+    return this._V_keyList.length - this.baseKey.length
   }
 
   /**
@@ -169,7 +178,7 @@ class Token {
    * @param {Boolean} noneIndex 是否使用index确认value的key
    */
   configAnalyse(configList, noneIndex = false) {
-    this.configInit()
+    const baseKeyIndex = this.configInit()
     this.useConfigInit()
     /**
      * 根据键值对更新config
@@ -188,7 +197,6 @@ class Token {
           return utils.deepClone(item).splice(0, item.length - 2).indexOf(key) !== -1
         }
       })
-      console.log(keyList, hasFunc, key, value)
       if (keyList !== undefined) {
         const v = hasFunc ? keyList[keyList.length - 1].call(this, key, value, this.nodeConfig[keyList[0]]) : value
         const j = hasFunc ? keyList[keyList.length - 3] : keyList[keyList.length - 2]
@@ -202,7 +210,8 @@ class Token {
         }
       } else { return false }
     }
-    configList.forEach((data, index) => {
+    configList.forEach((data_, index) => {
+      const data = this.replaceLineBreak ? data_.replace(/\n|\r|\t/g, '') : data_
       const key = data.split('=')[0]
       const left = data.indexOf('=')
       const value = data.slice(left + 1, data.length)
@@ -224,8 +233,9 @@ class Token {
           /**
            * 当前用index确定value
            */
-          if (keyList === undefined) {
-            const res = this._V_defaultIndexConfigAnalyse(key, value, undefined)
+          console.log(keyList)
+          if (keyList === undefined || index >= baseKeyIndex) {
+            const res = this._V_defaultIndexConfigAnalyse(key, value, data)
             if (res.res !== this.NOT_CHANGE_VALUE) this.updateConfig(res.key, res.res)
           } else {
             /**
@@ -261,10 +271,10 @@ class Token {
    * 该函数是在键值对没有匹配上的情况下会调用，进行一次判断，判断该值是否有用
    * @param {String} key 键
    * @param {String} value 值
-   * @param {*} configValue config中键对应的值
+   * @param {String} data 键 + '=' + 值
    * @returns 需要赋值的值，返回的是对象，如果不需要改变则返回 this.NOT_CHANGE_VALUE
    */
-  _V_defaultIndexConfigAnalyse(key, value, configValue) {
+  _V_defaultIndexConfigAnalyse(key, value, data) {
     return {
       res: this.NOT_CHANGE_VALUE
     }

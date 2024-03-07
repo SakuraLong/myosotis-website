@@ -16,6 +16,12 @@ class Templates extends Replaces {
     ]
     this.init()
   }
+  init() {
+    this.config.setting.custom.templates.forEach((temp) => {
+      this.parsers.push(temp.parser)
+    })
+    this.parsers.sort((a, b) => a.weight - b.weight)
+  }
   /**
    * 对字符串进行替换
    * @param {String} src 待替换的字符串

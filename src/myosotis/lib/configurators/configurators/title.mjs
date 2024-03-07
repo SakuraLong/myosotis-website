@@ -15,7 +15,8 @@ class TitleCfg extends Configurator {
       hoverAnimation: null,
       hasLink: null,
       family: ['font', 'family'],
-      color: ['font', 'color'],
+      size: ['font', 'size'],
+      color: null,
       classList: {
         path: ['classList'],
         func: (value) => { return this.classListAnalyse(value) }

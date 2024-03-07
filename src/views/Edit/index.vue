@@ -39,6 +39,8 @@
 import Myosotis from '@/myosotis'
 import AudioShowerParser from './audioShowerParser.mjs'
 import AudioShowerRenderer from './audioShowerRenderer.mjs'
+import PoemParser from './poemParser.mjs'
+import PoemRenderer from './poemRenderer.mjs'
 export default {
   name: 'Edit',
   beforeRouteLeave(to, from, next) {
@@ -131,8 +133,9 @@ export default {
             }
           }
         })
-        console.log(AudioShowerParser, AudioShowerRenderer)
+        // console.log(AudioShowerParser, AudioShowerRenderer)
         myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
+        myosotis.addTemplate(PoemParser, PoemRenderer)
         myosotis.render(this.code, this.$refs.editShower)
         this.myosotis = myosotis
         // SakuraRenderer.renderArticle(this.$refs.editShower, this.code)

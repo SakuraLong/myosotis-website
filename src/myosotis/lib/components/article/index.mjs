@@ -89,6 +89,9 @@ class Article {
       },
       settingConfig: this.config.setting
     }
+    /**
+     * 文章关闭观察器
+     */
     this.closeObserver = {
       beforeunloadFunc: this.beforeunload.bind(this),
       mutationObserver: null
@@ -98,11 +101,16 @@ class Article {
      */
     this.init()
   }
+
   init() {
     this.renderersList.forEach((Renderers) => {
       new Renderers(this.config).buildRenderersMap(this.map, this.data)
     })
   }
+
+  /**
+   * 渲染函数
+   */
   render() {
     const structure = new Structure(this.tree.config, this.tree, this.map, this.data)
     const article = structure._V_renderSelf().element
@@ -111,6 +119,7 @@ class Article {
     this.closeObserverInit()
     console.log(article, this.data)
   }
+
   closeObserverInit() {
     const closeFunc = this.close.bind(this)
     window.addEventListener('beforeunload', this.closeObserver.beforeunloadFunc)
@@ -124,12 +133,14 @@ class Article {
     const config = { childList: true, subtree: true }
     this.closeObserver.mutationObserver.observe(this.parent, config)
   }
+
   close() {
     console.log('渲染器关闭')
     if (this.eventManager) this.eventManager.close()
     if (this.closeObserver.mutationObserver) this.closeObserver.mutationObserver.disconnect()
     window.removeEventListener('beforeunload', this.closeObserver.beforeunloadFunc)
   }
+
   beforeunload(e) {
     this.close()
   }

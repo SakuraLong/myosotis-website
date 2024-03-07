@@ -3,8 +3,25 @@ import Node from '../node.mjs'
 class Component extends Node {
   constructor(name, config, src, replaceManager) {
     super('component', name, src)
+    /**
+     * 完整配置项
+     */
     this.config = config
+    /**
+     * 本组件配置项
+     */
+    this.componentConfig = this.config.option[name]
+    /**
+     * 设置的配置项到组件配置项映射表
+     */
+    this.configToNodeConfigMap = {}
+    /**
+     * 替换管理器
+     */
     this.replaceManager = replaceManager
+    /**
+     * 增加组件基础配置项
+     */
     this.baseKey = this.baseKey.concat(
       [
         ['float',       'f',        'left',   'right',    'none',     'center',     ['none', 'center', 'left', 'right'],    'none'], // 浮动情况
@@ -23,13 +40,26 @@ class Component extends Node {
         ['baseURL',     null,       ''] // 基础路径
       ]
     )
+    /**
+     * 预设组件配置项
+     */
     this.nodeConfig = {
       key:        parseInt(Math.random() * 1000000)
     }
-    this.configList = [] // 组件设置区域
-    this.dataList = [] // 组件数据区域
+    /**
+     * 组件设置区域通过|分割得到的列表
+     */
+    this.configList = []
+    /**
+     * 组件数据区域通过|分割得到的列表
+     */
+    this.dataList = []
     this.compInit()
   }
+
+  /**
+   * 组件数据初始化
+   */
   compInit() {
     const i = this.contentList.indexOf('-')
     if (i === -1) this.dataList = this.contentList
@@ -41,6 +71,35 @@ class Component extends Node {
       })
     }
   }
+
+  useConfigInit() {
+    const config = this.componentConfig
+    const flattenObject = (obj) => {
+      const result = []
+      const traverse = (obj, prefix) => {
+        for (const key in obj) {
+          if (key in obj) {
+            const newKey = prefix ? prefix + key[0].toUpperCase() + key.slice(1) : key
+
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+              traverse(obj[key], newKey)
+            } else {
+              result.push([newKey, obj[key]])
+            }
+          }
+        }
+      }
+      traverse(obj || [], '')
+      return result
+    }
+    const configList = flattenObject(config)
+    configList.forEach((config) => {
+      const key = this.configToNodeConfigMap[config[0]] === undefined ? config[0] : this.configToNodeConfigMap[config[0]]
+      if (key in this.nodeConfig) this.updateConfig(key, config[1])
+    })
+    console.log(configList)
+  }
+
   static begin(i, body, data, index) {
     if (body[i] === '{' && i < body.length - 1 && body[i + 1] === '|' && (i === 0 || (i > 0 && body[i - 1] === '\n'))) {
       data.startBegin = i

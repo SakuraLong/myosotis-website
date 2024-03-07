@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <div class="home-container">
-      <h1>Sakura Renderer</h1>
+      <h1>Myosotis</h1>
       <h2>文本渲染器</h2>
-      <p>基于 Vue 3 制作的简易文本渲染器</p>
+      <!-- <p>基于 Vue 3 制作的简易文本渲染器</p> -->
       <img
         class="home__sr-img"
         src="static/img/SRMain.png"
