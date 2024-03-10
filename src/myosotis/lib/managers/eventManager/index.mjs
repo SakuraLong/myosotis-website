@@ -4,18 +4,20 @@ class EventManager {
     this.closeFuncList = [] // 当触发关闭的时候调用的函数列表（释放绑定事件）
     // console.log(Object.prototype.hasOwnProperty.call(document.createElement('div').style, 'color'))
   }
-  addClose(func) {
-    this.closeFuncList.push(func)
+  addCloseFunc(func, param) {
+    this.closeFuncList.push([func, param])
     return this
   }
   close() {
     this.closeFuncList.forEach((func) => {
       try {
-        func()
+        func[0](...func[1])
       } catch {
         //
       }
     })
+    this.closeFuncList = []
+    this.betweenEventMap = new Map()
   }
 }
 

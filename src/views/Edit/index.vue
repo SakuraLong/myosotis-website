@@ -59,7 +59,8 @@ export default {
       code: '= Hello world',
       allowCtrlS: true,
       showCata: true,
-      myosotis: null
+      myosotis: null,
+      first: true
     }
   },
   mounted() {
@@ -116,73 +117,66 @@ export default {
     },
     render() {
       if (this.code !== '') {
-        new Myosotis.FontsLoader([
-          {
-            name: 'exo-light',
-            src: 'url(static/Fonts/Exo-Light.ttf)'
-          },
-          {
-            name: 'geosans',
-            src: 'url(' + require('./GeosansLight.ttf') + ')'
-          }
-        ])
-        const myosotis = new Myosotis({
-          setting: {
-            preview: {
-              preview: false
+        if (this.first) {
+          this.first = false
+          new Myosotis.FontsLoader([
+            {
+              name: 'exo-light',
+              src: 'url(static/Fonts/Exo-Light.ttf)'
+            },
+            {
+              name: 'geosans',
+              src: 'url(' + require('./GeosansLight.ttf') + ')'
             }
-          }
-        })
-        // console.log(AudioShowerParser, AudioShowerRenderer)
-        myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
-        myosotis.addTemplate(PoemParser, PoemRenderer)
-        myosotis.render(this.code, this.$refs.editShower)
-        this.myosotis = myosotis
-        // SakuraRenderer.renderArticle(this.$refs.editShower, this.code)
-        // const catalogue = new SakuraRenderer.Catalogue(this.$refs.cata)
-        // const renderer = SakuraRenderer.createRenderer(this.$refs.editShower)
-        // renderer.addModule('mmm', 'aaa').addTemplate(PoemParser).addComponent(AudioShowerParser, null).addTemplate(DreamParser) // addComponent('asc', 'hhh')
-        // renderer.addOption({
-        //   option: {
-        //     article: {
-        //       font: {
-        //         size: '16px'
-        //       },
-        //       classList: ['test-article']
-        //     },
-        //     title: {
-        //       textAlign: 'center',
-        //       borderPosition: 'none',
-        //       hasLink: true,
-        //       classList: ['test-title'],
-        //       font: {
-        //         family: '"Noto Serif SC", DM Serif Display, STZhongsong, STKaiti, KaiTi, Roboto, serif'
-        //       }
-        //     },
-        //     paragraph: {
-        //       font: {
-        //         family: '"Noto Serif SC", DM Serif Display, STZhongsong, STKaiti, KaiTi, Roboto, serif',
-        //         size: '20px'
-        //       },
-        //       classList: ['test-para']
-        //     }
-        //   }
-        // })
-        // renderer.bindCatalogue(catalogue)
-        // renderer.setArticle(this.code)
-        // console.log(new Date().getTime())
-        // renderer.render({
-        //   dom: this.$refs.editShower
-        // }).then((res) => {
-        //   console.log(new Date().getTime())
-        //   console.log(res)
-        //   console.log(renderer.getArticleData({ abc: 'asc' }))
-        // }).catch((error) => {
-        //   console.log(error)
-        // })
-        // this.renderer = renderer
-        // this.$refs.render.setArticle(this.code)
-        // this.$refs.render.render(this.$refs.editShower, )
+          ])
+          const myosotis = new Myosotis({
+            setting: {
+              preview: {
+                preview: false
+              }
+            }
+          })
+          myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
+          myosotis.addTemplate(PoemParser, PoemRenderer)
+          new Myosotis.FileLoader('./static/test/article/test.my').load().then((data) => {
+            this.code = data
+            const beginTime = new Date().getTime()
+            console.log('渲染开始时刻：', beginTime)
+            myosotis.render(data, this.$refs.editShower).then((res) => {
+              const endTime = new Date().getTime()
+              console.log('渲染结束时刻：', endTime)
+              console.log('渲染时长：', endTime - beginTime)
+              const memoryUsage = performance.memory
+              const usedMemory = memoryUsage.usedJSHeapSize
+              const totalMemory = memoryUsage.totalJSHeapSize
+              console.log(parseInt(usedMemory / 1024 / 1024), parseInt(totalMemory / 1024 / 1024))
+            })
+            this.myosotis = myosotis
+          })
+        } else {
+          const myosotis = new Myosotis({
+            setting: {
+              preview: {
+                preview: false
+              }
+            }
+          })
+          // console.log(AudioShowerParser, AudioShowerRenderer)
+          myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
+          myosotis.addTemplate(PoemParser, PoemRenderer)
+          const beginTime = new Date().getTime()
+          console.log('渲染开始时刻：', beginTime)
+          myosotis.render(this.code, this.$refs.editShower).then((res) => {
+            const endTime = new Date().getTime()
+            console.log('渲染结束时刻：', endTime)
+            console.log('渲染时长：', endTime - beginTime)
+            const memoryUsage = performance.memory
+            const usedMemory = memoryUsage.usedJSHeapSize
+            const totalMemory = memoryUsage.totalJSHeapSize
+            console.log(parseInt(usedMemory / 1024 / 1024), parseInt(totalMemory / 1024 / 1024))
+          })
+          this.myosotis = myosotis
+        }
       }
     }
   }

@@ -37,15 +37,9 @@ class Component extends Node {
         ['fontFamily',  'FF',       null,     'DEFAULT'],             // 字体 同上
         ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))], // 类名列表
         ['styleList',   'style',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))], // 样式列表
-        ['baseURL',     null,       ''] // 基础路径
+        ['baseURL',     'baseUrl',  null,       ''] // 基础路径
       ]
     )
-    /**
-     * 预设组件配置项
-     */
-    this.nodeConfig = {
-      key:        parseInt(Math.random() * 1000000)
-    }
     /**
      * 组件设置区域通过|分割得到的列表
      */
@@ -97,7 +91,7 @@ class Component extends Node {
       const key = this.configToNodeConfigMap[config[0]] === undefined ? config[0] : this.configToNodeConfigMap[config[0]]
       if (key in this.nodeConfig) this.updateConfig(key, config[1])
     })
-    console.log(configList)
+    // console.log(configList)
   }
 
   static begin(i, body, data, index) {
@@ -150,7 +144,7 @@ class Component extends Node {
     let i = nodeStack[nodeStack.length - 1].children.length
     let temp = []
     while (--i >= 0 && nodeStack[nodeStack.length - 1].children[i].type === 'config') {
-      console.log(nodeStack[nodeStack.length - 1].children[i])
+      // console.log(nodeStack[nodeStack.length - 1].children[i])
       temp = temp.concat(nodeStack[nodeStack.length - 1].children[i].config.configList)
     }
     temp = temp.reverse()

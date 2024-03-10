@@ -9,6 +9,8 @@ class Html extends Renderer {
   _V_renderSelf() {
     const config = this.config
     const ele = document.createElement(this.node.content)
+    this.renderChildren(ele, this.node.children)
+    this.setStyle(ele, config)
     return {
       text: false,
       element: ele

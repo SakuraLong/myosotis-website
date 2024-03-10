@@ -9,9 +9,10 @@
 
 .sa-table-container{
     position: relative;
+    width: 100%;
     max-width: 100%;
     /* overflow: hidden; */
-    width: auto;
+    /* width: auto; */
     height: auto;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -119,8 +120,9 @@
     border: 1px solid var(--sa-color-tr-border-bottom);
 }
 .sa-table__td--border {
-    border-left: 1px solid var(--sa-color-tr-border-bottom);
-    border-bottom: 1px solid var(--sa-color-tr-border-bottom);
+    /* border-left: 1px solid var(--sa-color-tr-border-bottom); */
+    /* border-bottom: 1px solid var(--sa-color-tr-border-bottom); */
+    border: 1px solid var(--sa-color-tr-border-bottom);
 }
 .sa-table--border .sa-table__td--border:first-child {
     border-left: none;

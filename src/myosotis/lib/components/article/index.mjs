@@ -125,12 +125,13 @@ class Article {
     window.addEventListener('beforeunload', this.closeObserver.beforeunloadFunc)
     this.closeObserver.mutationObserver = new MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
-        if (mutation.removedNodes.length > 0) {
+        if (mutation.type === 'childList' && mutation.removedNodes.length > 0) {
+          console.log('渲染器关闭 from mutation', mutation.removedNodes)
           closeFunc()
         }
       })
     })
-    const config = { childList: true, subtree: true }
+    const config = { childList: true }
     this.closeObserver.mutationObserver.observe(this.parent, config)
   }
 

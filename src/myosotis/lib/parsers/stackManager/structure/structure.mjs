@@ -9,8 +9,8 @@ class Structure extends Node {
     }
     this.baseKey = this.baseKey.concat(
       [
-        ['float',       'f',        'left', 'right', 'both', 'none', 'center', ['none', 'center', 'left', 'right'],    'none'],
-        ['clear',       'c',        ['none', 'center', 'left', 'right'],    'none'],
+        ['float',       'f',        'left',   'right',  'both', 'none',   'center', ['none', 'center', 'left', 'right'],    'none'],
+        ['clear',       'c',        ['none',  'center', 'left', 'right'], 'none'],
         ['maxWidth',    'maxW',     null,     '100%'],
         ['maxHeight',   'maxH',     null,     'none'],
         ['minWidth',    'minW',     null,     'none'],
@@ -22,9 +22,9 @@ class Structure extends Node {
         ['fontFamily',  'FF',       null,     'DEFAULT'],
         ['classList',   'class',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))],
         ['styleList',   'style',    null,     [],     (key, value, configValue) => configValue.concat(value.split(';').filter((value) => { return value !== '' }))],
-        ['pos',         'begin',    'end',    '开始', '结束',     null,   'begin',    this.analysePos],
-        ['container',   null,       false,    (key, value, configValue) => ['true', 'false'].indexOf(value) !== -1 ? eval(value) : key === value ? true : this.NOT_CHANGE_VALUE],
-        ['card',        null,       false,    (key, value, configValue) => ['true', 'false'].indexOf(value) !== -1 ? eval(value) : key === value ? true : this.NOT_CHANGE_VALUE]
+        ['pos',         'begin',    'end',    '开始',   '结束',     ['begin',    'end'],   'begin',    this.analysePos],
+        ['container',   [true,      false],   false,    this.trueOrFalse],
+        ['card',        [true,      false],   false,    this.trueOrFalse]
       ]
     )
     this.replaceManager = replaceManager

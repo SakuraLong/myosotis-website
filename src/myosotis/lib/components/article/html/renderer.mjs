@@ -49,6 +49,38 @@ class Renderer {
      * 渲染器预览配置项
      */
     this.previewConfig = this.settingConfig.preview
+    /**
+     * 判断是否需要渲染
+     */
+    this.NOT_RENDER = 'ASCSAPJVAONV0&^$^*30+_)**ggf^f$^dyv#$%^dlnlnBSDVNL;SDV'
+    /**
+     * 父节点渲染器
+     */
+    this.parentRenderer = null
+    /**
+     * 子节点渲染器列表
+     */
+    this.childrenRendererList = []
+    /**
+     * 节点自身html元素
+     */
+    this.htmlElement = null
+  }
+
+  /**
+   * 获取父节点渲染器
+   * @returns 父节点渲染器
+   */
+  getParentRenderer() {
+    return this.parentRenderer
+  }
+
+  /**
+   * 设置父节点渲染器
+   * @param {Renderer} renderer 父节点渲染器
+   */
+  setParentRenderer(renderer) {
+    this.parentRenderer = renderer
   }
 
   /**
@@ -141,12 +173,12 @@ class Renderer {
    * 可能有人会问，为什么不能用html节点进行子元素节点创建，这当然也是可以的
    * 但是如果需要定位每一个元素的信息，并且为标签设置配置项，那么必须要进行渲染器重写，因为html节点的渲染器没有配置项设置，只进行根据节点信息，返回一个html标签
    */
-  renderChildren(parent, node, rendererMap = null, onlyUseSelfMap = false) {
-    const l = node.children.length
+  renderChildren(parent, children, rendererMap = null, onlyUseSelfMap = false) {
+    const l = children.length
     for (let i = 0; i < l; i++) {
       if (this.previewFinishRender()) break
-      const child = node.children[i]
-      console.log('渲染器映射表查找：type：' + child.type + ' name：' + child.name)
+      const child = children[i]
+      // console.log('渲染器：type：' + this.type + ' name：' + this.name + ' 映射表查找：type：' + child.type + ' name：' + child.name)
       let ChildRenderer = null
       if (rendererMap !== null) {
         if (onlyUseSelfMap) ChildRenderer = rendererMap[child.map]
@@ -155,7 +187,11 @@ class Renderer {
       if (ChildRenderer === undefined) continue
 
       const childRenderer = new ChildRenderer(child.config, child, this.map, this.data)
+      childRenderer.setParentRenderer(this)
+      this.childrenRendererList.push(childRenderer)
       const res = childRenderer.render()
+      if (res.element === this.NOT_RENDER) continue
+      childRenderer.htmlElement = res
       if (res.text) parent.append(res.element)
       else parent.appendChild(res.element)
     }
@@ -172,7 +208,7 @@ class Renderer {
       const value = config[key]
       if (ignore.indexOf(key) !== -1) continue
       if (value === 'DEFAULT') continue
-      if (key in element.style) {
+      if (key in element.style && element.style[key] !== value) {
         element.style[key] = value
       } else {
         if (key === 'classList' && Array.isArray(value)) {
@@ -184,7 +220,7 @@ class Renderer {
             const styleName = style.split('=')[0]
             const left = style.indexOf('=')
             const styleValue = style.slice(left + 1, style.length)
-            if (styleName in element.style) {
+            if (styleName in element.style && element.style[styleName] !== styleValue) {
               element.style[styleName] = styleValue
             }
           })
@@ -235,6 +271,16 @@ class Renderer {
         else return true
     }
     return false
+  }
+
+  /**
+   * 设置关闭时调用的函数
+   * 释放、关闭一些资源等
+   * @param {Function} func 关闭调用函数
+   * @param {Array} param 函数需要的传参
+   */
+  addCloseFunc(func, param = []) {
+    this.data.mamagers.eventManager.addCloseFunc(func.bind(this), param)
   }
 }
 

@@ -8,7 +8,7 @@ class Grammar extends Replace {
     this.regex = null
   }
   _V_replaceSelf(content, i) {
-    this.content = this.regex.exec(content)[1]
+    this.content = this.regex.exec(content)[1] || ''
   }
   replace(src) {
     let h = 0
@@ -21,8 +21,10 @@ class Grammar extends Replace {
          * 深拷贝节点信息
          */
         const value = utils.deepClone(this.get())
-        const textNode = this.createTextNode(value.content)
-        value.children.push(textNode)
+        if (value.content) {
+          const textNode = this.createTextNode(value.content)
+          value.children.push(textNode)
+        }
         const key = this.getReplaceStr()
         src = src.replace(l, key)
         this.replaceDict[this.type].push({

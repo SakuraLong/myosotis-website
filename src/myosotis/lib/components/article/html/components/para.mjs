@@ -39,19 +39,13 @@ class Paragraph extends ComponentRenderer {
       p.classList.add(className)
     })
     /* ----- 组件子元素加入 ----- */
-    this.renderChildren(p, this.node)
+    this.renderChildren(p, this.node.children)
     pTitle.textContent = config.title
     /* ----- 组件信息计算 ----- */
     /* ----- 标签attr设置 ----- */
-    p.setAttribute('style', config.style)
+    // p.setAttribute('style', config.style)
     /* ----- 标签style设置 ----- */
-    p.style.lineHeight = config.lineHeight
-    p.style.border = config.border
-    p.style.borderColor = config.bc
-    p.style.backgroundColor = config.bgc
-    p.style.clear = config.clear
-    if (config.fontFamily !== 'DEFAULT') p.style.fontFamily = config.fontFamily
-    if (config.fontSize !== 'DEFAULT') p.style.fontSize = config.fontSize
+    this.setStyle(p, config)
     /* ----- 标签结构构建 ----- */
     // console.log(config)
     if (config.type !== 'default') {

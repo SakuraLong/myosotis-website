@@ -8,12 +8,12 @@ class Title extends Component {
       ['level',             null,       1,          (key, value, configValue) => parseInt(value) > 0 && parseInt(value) < 7 ? value : this.NOT_CHANGE_VALUE], // 标题等级
       ['textAlign',         'TA',       ['left',    'center',     'l',        'c'],     'left'],                          // 标题文字位置
       ['borderPosition',    'BP',       ['left',    'l',          'bottom',   'b',      'n',    'none'],      'left'],    // 标题条位置
-      ['hoverAnimation',    'HA',       null,       false,        (key, value, configValue) => ['true', 'false'].indexOf(value) !== -1 ? eval(value) : key === value ? true : this.NOT_CHANGE_VALUE], // 标题是否有hover动画
-      ['hasLink',           'HL',       null,       true,         (key, value, configValue) => ['true', 'false'].indexOf(value) !== -1 ? eval(value) : key === value ? true : this.NOT_CHANGE_VALUE]  // 标题是否有点击链接
+      ['hoverAnimation',    'HA',       null,       false,        this.trueOrFalse], // 标题是否有hover动画
+      ['hasLink',           'HL',       null,       true,         this.trueOrFalse]  // 标题是否有点击链接
     ]
   }
+
   _V_defaultConfigAnalyse(key, value, configValue) {
-    console.log(key, this.configList)
     if (key.startsWith('h')) {
       try {
         const res = parseInt(key[1])
@@ -31,6 +31,7 @@ class Title extends Component {
       res: this.NOT_CHANGE_VALUE
     }
   }
+
   static begin(i, body, data, index) {
     if (body[i] === '=' && (i === 0 || (i > 0 && body[i - 1] === '\n'))) {
       for (let j = i; j < i + 7 && j < body.length; j++) {
@@ -48,12 +49,16 @@ class Title extends Component {
           }
         }
       }
+      return {
+        match: false
+      }
     } else {
       return {
         match: false
       }
     }
   }
+
   static end(i, body, data) {
     if (body[i] === '\n' || i === body.length - 1) {
       const title = body.slice(data.startBegin, i + 1)
@@ -69,6 +74,7 @@ class Title extends Component {
       }
     }
   }
+
   _V_analyse() {
     // 根据dataList分析组件数据
     let textNode = null

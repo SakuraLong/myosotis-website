@@ -1,13 +1,17 @@
 import MapBuilder from '../mapBuilder.mjs'
 import Title from './title.mjs'
 import Paragraph from './para.mjs'
+import List from './list.mjs'
+import Table from './table.mjs'
 
 class Components extends MapBuilder {
   constructor(config) {
     super(config, 'component')
     this.renderers = [
       Title,
-      Paragraph
+      Paragraph,
+      List,
+      Table
     ]
     this.init()
   }

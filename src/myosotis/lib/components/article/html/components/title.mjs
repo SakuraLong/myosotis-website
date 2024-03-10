@@ -52,13 +52,12 @@ class Title extends ComponentRenderer {
       h.classList.add(className)
     })
     /* ----- 组件子元素加入 ----- */
-    this.renderChildren(span, this.node)
+    this.renderChildren(span, this.node.children)
     a.textContent = '#'
     /* ----- 组件信息计算 ----- */
     const content = span.textContent
     const tid = config.id || content
     let i = 0
-    console.log(this.data.title)
     while (this.data.title.find((item) => item.id === tid + (i === 0 ? '' : '_' + i.toString())) !== undefined) {
       i++
     }

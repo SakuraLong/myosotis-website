@@ -37,9 +37,10 @@ import LabelRenderer from './components/article/html/labels/label.mjs'
  */
 import Article from './components/article/index.mjs'
 /**
- * 导入字体加载器
+ * 导入加载器
  */
 import FontsLoader from './loaders/fontsLoader.mjs'
+import FileLoader from './loaders/fileLoader.mjs'
 /**
  * 导入utils
  */
@@ -59,6 +60,7 @@ class Myosotis {
   static LabelRenderer = LabelRenderer
 
   static FontsLoader = FontsLoader
+  static FileLoader = FileLoader
 
   constructor(option, userData) {
     /**

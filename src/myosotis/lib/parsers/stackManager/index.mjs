@@ -4,6 +4,8 @@ import Config from './config/config.mjs'
 import Component from './components/component.mjs'
 import Components from './components/components.mjs'
 import Title from './components/title.mjs'
+import List from './components/list.mjs'
+import Table from './components/table.mjs'
 
 class StackManager {
   constructor(config, replaceManager) {
@@ -25,18 +27,24 @@ class StackManager {
       Component.begin,
       Structure.begin,
       Config.begin,
-      Title.begin
+      Title.begin,
+      List.begin,
+      Table.begin
     ]
     const endFunc = [
       Component.end,
       Structure.end,
       Config.end,
-      Title.end
+      Title.end,
+      List.end,
+      Table.end
     ]
     const parsers = [
       Structure,
       Config,
-      Title
+      Title,
+      List,
+      Table
     ]
     // Structure 0
     // Config 1

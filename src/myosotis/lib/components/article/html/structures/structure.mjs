@@ -25,7 +25,7 @@ class Structure extends Renderer {
       div.classList.add(className)
     })
     /* ----- 组件子元素加入 ----- */
-    this.renderChildren(div, this.node)
+    this.renderChildren(div, this.node.children)
     /* ----- 组件信息计算 ----- */
     /* ----- 标签attr设置 ----- */
     /* ----- 标签style设置 ----- */

@@ -68,6 +68,10 @@ class Token {
      */
     this._V_nameList = []
     /**
+     * utils
+     */
+    this.utils = utils
+    /**
      * 判断值是否改变
      */
     this.NOT_CHANGE_VALUE = 'ASCSAPJVAONV0&^$^*30+_)**ggf^f$^dyv#$%^dlnlnBSDVNL;SDV'
@@ -98,12 +102,12 @@ class Token {
    * @param {String} tn 类型与名字
    * @returns 相对节点
    */
-  create(content, t, n = null) {
+  create(content, t, n = null, config = {}) {
     return {
       type:       t,
       name:       n || t,
       level:      0,
-      config:     {},
+      config:     config,
       content:    content,
       children:   []
     }
@@ -123,8 +127,8 @@ class Token {
    * @param {String} element 内容
    * @returns html节点
    */
-  createHtmlNode(element) {
-    return this.create(element, 'html')
+  createHtmlNode(element, config = {}) {
+    return this.create(element, 'html', 'html', config)
   }
 
   /**
@@ -140,10 +144,18 @@ class Token {
         [key]: value
       })
     } else {
-      if (value !== judge) {
-        Object.assign(this.nodeConfig, {
-          [key]: value
-        })
+      if (Array.isArray(judge)) {
+        if (judge.indexOf(value) !== -1) {
+          Object.assign(this.nodeConfig, {
+            [key]: value
+          })
+        }
+      } else {
+        if (value !== judge) {
+          Object.assign(this.nodeConfig, {
+            [key]: value
+          })
+        }
       }
     }
   }
@@ -156,10 +168,17 @@ class Token {
   configInit() {
     this._V_keyList.forEach((key) => {
       const res = this.baseKey.find((item) => item[0] === key[0])
+      /**
+       * 如果baseKey中存在_V_keyList的键，则删除（_V_keyList可以重写baseKey）
+       */
       if (res !== undefined) this.baseKey.splice(this.baseKey.indexOf(res), 1)
     })
     this._V_keyList = this._V_keyList.concat(this.baseKey)
     this._V_keyList.forEach((key) => {
+      /**
+       * 如果nodeConfig中存在键，则不进行赋值（如果有key需要进行判断，但是由自身函数进行赋值，且可能对结构有要求，则可以直接写到nodeConfig中）
+       */
+      if (key[0] in this.nodeConfig) return
       this.updateConfig(key[0], typeof key[key.length - 1] === 'function' ? key[key.length - 2] : key[key.length - 1])
     })
     return this._V_keyList.length - this.baseKey.length
@@ -201,8 +220,10 @@ class Token {
         const v = hasFunc ? keyList[keyList.length - 1].call(this, key, value, this.nodeConfig[keyList[0]]) : value
         const j = hasFunc ? keyList[keyList.length - 3] : keyList[keyList.length - 2]
         if (v === this.NOT_CHANGE_VALUE) return true
-        if (j === null || j.indexOf(v) !== -1) {
-          console.log('updateConfig')
+        if (j === null && key !== value) {
+          this.updateConfig(keyList[0], v)
+          return true
+        } else if (j !== null && j.indexOf(v) !== -1) {
           this.updateConfig(keyList[0], v)
           return true
         } else {
@@ -233,7 +254,7 @@ class Token {
           /**
            * 当前用index确定value
            */
-          console.log(keyList)
+          // console.log(keyList)
           if (keyList === undefined || index >= baseKeyIndex) {
             const res = this._V_defaultIndexConfigAnalyse(key, value, data)
             if (res.res !== this.NOT_CHANGE_VALUE) this.updateConfig(res.key, res.res)
@@ -278,6 +299,20 @@ class Token {
     return {
       res: this.NOT_CHANGE_VALUE
     }
+  }
+
+  /**
+   * key === value return true
+   * value === true return true
+   * value === false return false
+   * return false
+   * @param {String} key 键
+   * @param {String} value 值
+   * @param {*} configValue nodeConfig中key对应的value
+   * @returns Boolean
+   */
+  trueOrFalse(key, value, configValue) {
+    return ['true', 'false'].indexOf(value) !== -1 ? eval(value) : key === value ? true : this.NOT_CHANGE_VALUE
   }
 }
 

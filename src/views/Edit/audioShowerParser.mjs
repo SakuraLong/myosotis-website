@@ -4,7 +4,7 @@ class AudioShowerParser extends Myosotis.Component {
   constructor(config, src, replaceManager) {
     super('audioShower', config, src, replaceManager)
     this.nodeConfig = {
-      src: [],
+      src: '',
       imgSrc: ''
     }
     this._V_nameList = ['audioShower', '音频可视化']
@@ -22,7 +22,7 @@ class AudioShowerParser extends Myosotis.Component {
       } else if (i === 1) {
         this.updateConfig('imgSrc', data)
       } else {
-        this.nodeConfig.src.push(data)
+        this.updateConfig('src', data)
       }
     })
   }

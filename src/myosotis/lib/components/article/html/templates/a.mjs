@@ -12,7 +12,7 @@ class A extends TemplateRenderer {
     /* ----- 标签类设置 ----- */
     a.classList.add('sa-sr-ahref-item')
     /* ----- 组件子元素加入 ----- */
-    this.renderChildren(a, this.node)
+    this.renderChildren(a, this.node.children)
     /* ----- 组件信息计算 ----- */
     /* ----- 标签attr设置 ----- */
     if (config.title !== '') a.setAttribute('title', config.title)

@@ -3,7 +3,7 @@ import LabelRenderer from './label.mjs'
 class Poem extends LabelRenderer {
   static name = 'poem'
   constructor(config, node, map, data) {
-    super(config, node, map, data)
+    super('poem', config, node, map, data)
   }
   _V_renderSelf() {
     const config = this.config
@@ -11,7 +11,7 @@ class Poem extends LabelRenderer {
     const pre = document.createElement('pre')
     /* ----- 标签类设置 ----- */
     /* ----- 组件子元素加入 ----- */
-    this.renderChildren(pre, this.node)
+    this.renderChildren(pre, this.node.children)
     /* ----- 组件信息计算 ----- */
     /* ----- 标签attr设置 ----- */
     /* ----- 标签style设置 ----- */

@@ -1,5 +1,7 @@
 import Title from './title.mjs'
 import Paragraph from './para.mjs'
+import List from './list.mjs'
+import Table from './table.mjs'
 
 class Components {
   constructor(config, replaceManager) {
@@ -7,7 +9,9 @@ class Components {
     this.replaceManager = replaceManager
     this.parsers = [
       Title,
-      Paragraph
+      Paragraph,
+      List,
+      Table
     ]
     this.init()
   }

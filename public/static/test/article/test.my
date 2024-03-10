@@ -1,0 +1,219 @@
+?config HL=false|TA=center|BP=none
+= Hello world
+
+= 结构测试
+
+{(begin|container)}
+{(begin|container|w=50%)}
+{(begin|container|w=100%)}
+{(begin|card|w=50%)}
+?config info|h=100%
+左左上
+{(end)}
+{(begin|card|w=50%)}
+?config info|h=100%
+左右上
+{(end)}
+{(begin|card|w=100%)}
+?config info|w=100%
+左
+{(end)}
+{(end)}
+{(end)}
+{(begin|card|w=50%)}
+?config info|h=100%
+右
+?config info|h=100%
+右
+{(end)}
+{(end)}
+
+= 组件测试
+== 标题
+= 一级标题测试
+== 二级标题测试
+=== 三级标题测试
+==== 四级标题测试
+===== 五级标题测试
+====== 六级标题测试
+======= 七级标题测试
+
+== 段落
+
+{(begin|container)}
+{(begin|card|w=100%)}
+普通段落普通段落普通段落普通段落
+{(end)}
+{(begin|card|w=50%)}
+?config success
+success段落
+{(end)}
+{(begin|card|w=50%)}
+?config warning
+warning段落
+{(end)}
+{(begin|card|w=50%)}
+?config tip
+tip段落
+{(end)}
+{(begin|card|w=50%)}
+?config info
+info段落
+{(end)}
+{(end)}
+
+== 列表
+
+{(begin|container)}
+{(begin|card|w=50%)}
+?config HL=false|TA=c|BP=none
+=== 有序列表
++ 有序列表
++ 有序列表
+++ 有序列表
+++ 有序列表
++++ 有序列表
+++++ 有序列表
+{(end)}
+{(begin|card|w=50%)}
+?config HL=false|TA=c|BP=none
+=== 无序列表
+* 无序列表
+** 无序列表
+*** 无序列表
+**** 无序列表
+***** 无序列表
+****** 无序列表
+{(end)}
+{(begin|card|w=100%)}
+----
+{(end)}
+{(begin|card|w=25%)}
+?config HL=false|TA=c|BP=none
+=== 有序列表chinese
+?config chinese
++ 有序列表
++ 有序列表
+++ 有序列表
+++ 有序列表
++++ 有序列表
+++++ 有序列表
+{(end)}
+{(begin|card|w=25%)}
+?config HL=false|TA=c|BP=none
+=== 有序列表number
+?config number
++ 有序列表
++ 有序列表
+++ 有序列表
+++ 有序列表
++++ 有序列表
+++++ 有序列表
+{(end)}
+{(begin|card|w=25%)}
+?config HL=false|TA=c|BP=none
+=== 有序列表template和chinese
+?config t=第*季|chinese
++ 有序列表
++ 有序列表
+++ 有序列表
+++ 有序列表
++++ 有序列表
+++++ 有序列表
+{(end)}
+{(begin|card|w=25%)}
+?config HL=false|TA=c|BP=none
+=== 无序列表template
+?config t=*;无序
+* 无序列表
+** 无序列表
+*** 无序列表
+**** 无序列表
+***** 无序列表
+****** 无序列表
+{(end)}
+{(end)}
+
+== 表格
+?config TMinW=80px
+| + Fate/stay night [Heaven's Feel] c=4 |
+| 人物 r=3 | 御主 | 卫宫士郎 • 远坂凛 • 伊莉雅丝菲尔·冯·爱因兹贝伦 • 间桐樱 • 间桐脏砚 c=2|
+| 从者 | Saber Alter • Archer • Lancer • Rider • Caster • Assassin • Berserker • 吉尔伽美什 • 真Assassin • Avenger c=2|
+| 其他 | 莉洁莉特 • 塞拉 • 间桐慎二 • 言峰绮礼 • 葛木宗一郎 • 柳洞一成 • 后藤劾以 • 美缀绫子 • 莳寺枫 • 冰室钟 • 三枝由纪香 • 藤村大河 • 卫宫切嗣 • 远坂时臣 • 羽斯缇萨·里姿莱希·冯·爱因兹贝伦 • 尤布斯塔库哈依德·冯·爱因兹贝伦 • 远坂永人 • 基修亚·泽尔里奇·修拜因奥古 • 克劳蒂亚·奥尔黛西亚 c=2|
+| 创作 r=2 | 媒介 | 剧场版 Heaven's Feel • 卫宫家今天的饭 • 幻想嘉年华 c=2|
+| 人员 | TYPE-MOON • 奈须蘑菇 • 武内崇 • 芳贺敬太 • ufotable c=2|
+| 音乐 r=4 | 游戏 r=2 | 初版 | THIS ILLUSION（OP） • days（ED） • EMIYA（BGM） • 約束された勝利の剣（BGM）|
+| 新星版 | 黄金の輝き（PS2OP/PCOP） • Another Heaven（PSVOP/MPOP） • Link（ED）|
+| 动画 r=2 | 剧场版 | 花の唄（Ⅰ） • I beg you（Ⅱ） • 春はゆく（Ⅲ）|
+| 卫宫饭 | エプロンボーイ（OP） • コラージュ（ED）|
+
+=== 特殊表格
+
+?config TW=100px,100px,100px|TH=100px,100px,100px|TP=0
+| hide d | hide d | hide d | hide d |
+| hide d | 1 c=2 | 2 r=2 |
+| hide d | 4 r=2 | 5 |
+| hide d | 3 c=2 |
+
+= 语法测试
+
+?config w=100%|TW=150px
+| 名称 | 测试结果 |
+| 删除线 | ~~删除线~~ |
+| 分割线 | ---- |
+
+= 模板测试
+
+?config w=100%|TW=150px
+| 名称 | 测试结果 |
+| 超链接 | {{a|https://www.nankai.edu.cn/|南开大学}} |
+
+= 模块测试
+
+= 自定义测试
+
+{(begin|container)}
+?config w=100%|TW=50%,50%
+| + 测试 c=2 |
+| 自定义组件测试（音频可视化） | 自定义模板测试（诗歌） |
+
+{(begin|card|w=50%)}
+{|audioShower|fillColor=#7CA3DA|baseUrl=./static/test/audio/
+|-
+| 「轻涟」
+| fufu.jpg
+| fufu.mp3
+|}
+{(end)}
+{(begin|card|w=50%)}
+{{poem
+|《原神》剧情PV-「轻涟」及其演绎版的歌词
+|
+|Ah, si je pouvais vivre dans l'eau,
+啊，若化水复回归途
+le monde serait-il plus beau?
+令故土朝暮如初
+Nous pardonneras-tu, ô chère mère?
+啊母亲可否将我宽恕
+L'eau dans son courant fait danser nos vies.
+向四季流溯，引万籁驰骛
+Et la cité, elle nourrit.
+所过处百废复苏
+Ainsi que toi, mon doux amour.
+亦充盈挚爱的心湖
+
+Non, le grand amour ne suffit pas.
+爱，就将这酣梦深埋
+Seul un adieu fleurira.
+诀别如繁花盛开
+C'est notre histoire de vie, douce et amère.
+似你我往怀，愉快悲哀
+Moi, je suis et serai toujours là,
+爱，我会在过去未来
+à voir le monde et sa beauté.
+注视这世间精彩
+Et ça ne changera jamais, jamais...
+一切从未改，未改……
+}}
+{(end)}
+{(end)}
