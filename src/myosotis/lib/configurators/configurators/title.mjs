@@ -6,11 +6,11 @@ class TitleCfg extends Configurator {
     this.optionMap = {
       textAlign: {
         path: ['textAlign'],
-        func: (value) => { return this.textAlignAnalyse(value) }
+        func: this.textAlignAnalyse
       },
       borderPosition: {
         path: ['borderPosition'],
-        func: (value) => { return this.borderPositionAnalyse(value) }
+        func: this.borderPositionAnalyse
       },
       hoverAnimation: null,
       hasLink: null,
@@ -19,7 +19,7 @@ class TitleCfg extends Configurator {
       color: null,
       classList: {
         path: ['classList'],
-        func: (value) => { return this.classListAnalyse(value) }
+        func: this.classListAnalyse
       }
     }
   }

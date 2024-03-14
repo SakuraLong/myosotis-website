@@ -30,8 +30,10 @@ class Label extends Replace {
      * 深拷贝节点信息
      */
     const value = utils.deepClone(this.get())
-    const textNode = this.createTextNode(value.content)
-    value.children.push(textNode)
+    if (value.content !== '') {
+      const textNode = this.createTextNode(value.content)
+      value.children.push(textNode)
+    }
     const key = this.getReplaceStr()
     this.replaceDict[this.type].push({
       key: key,

@@ -1,19 +1,68 @@
 import utils from '../../../common/utils.mjs'
+
+/**
+ * 配置项解析器
+ */
 class Configurator {
   constructor(status, path = [], modifiable, dataList, prefix = '', statusName = '', baseOption) {
+    /**
+     * 配置项解析基础路径
+     */
     this.basePath = ['option']
-    this.status = status // 当前配置项区域的状态
+    /**
+     * 配置项区域的状态
+     */
+    this.status = status
+    /**
+     * 当前区域基于basePath的查找方法
+     */
     this.path = path // 当前区域如何查找
+    /**
+     * 是否允许文章区域修改此区域的配置项
+     *
+     * 默认传值都是true
+     *
+     * 也可以直接设置true/false
+     */
     this.modifiable = modifiable // 是否允许文章区域修改此区域的配置项
+    /**
+     * 配置项数据列表
+     */
     this.dataList = dataList // 当前配置项的数据列表
+    /**
+     * 配置项前缀
+     */
     this.prefix = prefix // 配置项前缀
+    /**
+     * 配置项状态区域开始标记名称
+     */
     this.statusName = statusName // 配置项状态区域开始标记名称
+    /**
+     * 配置项
+     */
     this.baseOption = baseOption // 浅拷贝，直接修改
+    /**
+     * 深拷贝函数
+     */
     this.deepClone = utils.deepClone
+    /**
+     * 匹配状态判断
+     */
     this.type = -1
+    /**
+     * 可设置的配置项图
+     */
     this.optionMap = {}
+    /**
+     * 不需要进行配置项修改的返回值
+     */
     this.NOT_CHANGE_OPTION = 'ASCSAPJVAONV0&^$^*30+_)**ggf^f$^dyv#$%^dlnlnBSDVNL;SDV'
   }
+
+  /**
+   *
+   * @returns
+   */
   judge() {
     if (this.dataList.length === 1) {
       if (this.dataList[0] === this.statusName) {
@@ -55,7 +104,7 @@ class Configurator {
     } else if (Array.isArray(mapRes)) {
       this.changeOption(mapRes, value)
     } else if (typeof mapRes === 'object') {
-      const func = mapRes.func
+      const func = mapRes.func.bind(this)
       let res = null
       if (func !== undefined) {
         res = func(value)
@@ -99,6 +148,7 @@ class Configurator {
     }
     return true
   }
+
   /**
    * 根据可选值列表和值返回值
    * @param {Array} list 可选值列表
@@ -109,6 +159,7 @@ class Configurator {
     if (list.indexOf(value) !== -1) return value
     else return this.NOT_CHANGE_OPTION
   }
+
   classListAnalyse(value) {
     return value.split(',').filter((value) => { return value !== '' })
   }

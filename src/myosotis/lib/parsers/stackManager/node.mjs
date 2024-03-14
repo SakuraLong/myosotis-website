@@ -1,5 +1,8 @@
 import Token from '../token.mjs'
 
+/**
+ * 节点基类
+ */
 class Node extends Token {
   constructor(type, name, src) {
     super(type, name)
@@ -17,13 +20,17 @@ class Node extends Token {
     this.src = src.replace(/\n|\r|\t/g, '').slice(2, -2)
     this.dataInit()
   }
+
+  /**
+   * 通过|分割src
+   */
   dataInit() {
-    // 通过|分割src
     this.contentList = this.src.split('|')
     for (let i = 0; i < this.contentList.length; i++) {
       this.contentList[i] = this.contentList[i].trim()
     }
   }
+
   static paraAnalyse = (i, body, data) => {
     let temp = body.slice(data.startEnd + 1, i).trim()
     const res = []
@@ -35,9 +42,15 @@ class Node extends Token {
     })
     return res
   }
+
   build(nodeStack) {
     return
   }
+
+  /**
+   * 节点判别函数
+   * @returns 是否是该节点
+   */
   judge() {
     if (this._V_nameList.indexOf(this.contentList[0]) !== -1) {
       return true

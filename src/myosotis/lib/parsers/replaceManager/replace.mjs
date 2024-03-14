@@ -1,8 +1,8 @@
-// 替换器基类
-//
-
 import Token from '../token.mjs'
 
+/**
+ * 替换器基类
+ */
 class Replace extends Token {
   constructor(type, name, replaceDict) {
     super(type, name)
@@ -126,6 +126,7 @@ class Replace extends Token {
     }
     searchText(node)
   }
+
   /**
    * 模板模块判别函数
    * @param {Array} contentList 数据列表

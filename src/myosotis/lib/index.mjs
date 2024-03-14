@@ -46,6 +46,23 @@ import FileLoader from './loaders/fileLoader.mjs'
  */
 import utils from '../common/utils.mjs'
 
+/**
+ * class Myosotis
+ *
+ * 解析/渲染类
+ *
+ * ##### 使用方法
+ * ```javascript
+ * import Myosotis from 'myosotis'
+ * new Myosotis().render('= Hello world', document.body)
+ * .then((res) => {
+ *  console.log('渲染成功')
+ * })
+ * .catch((err) => {
+ *  console.log('渲染失败')
+ * })
+ * ```
+ */
 class Myosotis {
   static Configurator = Configurator
 
@@ -103,6 +120,14 @@ class Myosotis {
    * - componentCfg (Configurator): component configurator(inherited from Configurator) 组件配置项解析器（继承自Configurator）
    * - config (Object): component config 组件基础配置
    */
+  /**
+   * 向渲染器添加自定义组件
+   * @param {Component} component 组件解析器
+   * @param {ComponentRenderer} componentRenderer 组件渲染器
+   * @param {Configurator} componentCfg 组件配置项解析器（可选）
+   * @param {Object} config 组件配置项（有配置项解析器则必填）
+   * @returns this
+   */
   addComponent(component, componentRenderer, componentCfg = null, config = null) {
     if (!utils.check(component, Component, 'class')) return this
     if (!utils.check(componentRenderer, ComponentRenderer, 'class')) return this
@@ -115,6 +140,12 @@ class Myosotis {
     return this
   }
 
+  /**
+   * 向渲染器添加自定义模板
+   * @param {Template} template 模板解析器
+   * @param {TemplateRenderer} templateRenderer 模板渲染器
+   * @returns this
+   */
   addTemplate(template, templateRenderer) {
     if (!utils.check(template, Template, 'class')) return this
     if (!utils.check(templateRenderer, TemplateRenderer, 'class')) return this
@@ -136,6 +167,7 @@ class Myosotis {
    * - parent (Object): the parent HTML element of the article 文章的父元素
    *
    * Render articles that comply with our renderer syntax into HTML elements.
+   *
    * 将我们符合我们渲染器语法的文章渲染成html元素
    *
    */
@@ -181,7 +213,7 @@ class Myosotis {
    */
   renderArticle(tree, parent) {
     if (this.article) this.article.close()
-    this.article = new Article(this.config, tree, parent)
+    this.article = new Article(this.config, tree, parent, this.userData)
     this.article.render()
   }
 
@@ -189,6 +221,11 @@ class Myosotis {
     if (!this.article) return false
   }
 
+  /**
+   * Myosotis.close()
+   *
+   * 主动释放资源
+   */
   close() {
     if (this.article) this.article.close()
     if (this.catalogue) this.catalogue.close()

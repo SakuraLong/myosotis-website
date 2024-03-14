@@ -155,7 +155,7 @@ class TableTdRenderer extends ComponentRenderer {
     /* ----- 标签style设置 ----- */
     /* ----- 标签结构构建 ----- */
     config.display = config.display ? 'table-cell' : 'none'
-    this.setStyle(td, config)
+    this.setStyle(td, config, ['r'])
     /* ----- 返回组件信息 ----- */
     return {
       text: false,

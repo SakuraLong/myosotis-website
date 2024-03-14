@@ -41,9 +41,12 @@ import AudioShowerParser from './audioShowerParser.mjs'
 import AudioShowerRenderer from './audioShowerRenderer.mjs'
 import PoemParser from './poemParser.mjs'
 import PoemRenderer from './poemRenderer.mjs'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/atom-one-light.css'
 export default {
   name: 'Edit',
   beforeRouteLeave(to, from, next) {
+    next()
     if (this.code !== '= Hello world') {
       const answer = window.confirm('系统可能不会保存你所做的修改')
       if (answer) {
@@ -117,6 +120,18 @@ export default {
     },
     render() {
       if (this.code !== '') {
+        const myosotis = new Myosotis({
+          setting: {
+            preview: {
+              preview: false
+            }
+          }
+        }, {
+          highlight: (code, lang) => {
+            const res = hljs.highlightAuto(code, lang === '' ? null : [lang]).value
+            return res
+          }
+        })
         if (this.first) {
           this.first = false
           new Myosotis.FontsLoader([
@@ -129,13 +144,6 @@ export default {
               src: 'url(' + require('./GeosansLight.ttf') + ')'
             }
           ])
-          const myosotis = new Myosotis({
-            setting: {
-              preview: {
-                preview: false
-              }
-            }
-          })
           myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
           myosotis.addTemplate(PoemParser, PoemRenderer)
           new Myosotis.FileLoader('./static/test/article/test.my').load().then((data) => {
@@ -154,14 +162,6 @@ export default {
             this.myosotis = myosotis
           })
         } else {
-          const myosotis = new Myosotis({
-            setting: {
-              preview: {
-                preview: false
-              }
-            }
-          })
-          // console.log(AudioShowerParser, AudioShowerRenderer)
           myosotis.addComponent(AudioShowerParser, AudioShowerRenderer)
           myosotis.addTemplate(PoemParser, PoemRenderer)
           const beginTime = new Date().getTime()

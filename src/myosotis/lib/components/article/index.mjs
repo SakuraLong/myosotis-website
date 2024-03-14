@@ -1,7 +1,3 @@
-/**
- * 文章类
- */
-
 import Components from './html/components/components.mjs'
 import Structures from './html/structures/structures.mjs'
 import Labels from './html/labels/labels.mjs'
@@ -15,7 +11,7 @@ import Structure from './html/structures/structure.mjs'
 import EventManager from '../../managers/eventManager/index.mjs'
 
 class Article {
-  constructor(config, tree, parent, catalogue = null) {
+  constructor(config, tree, parent, userData, catalogue = null) {
     /**
      * 完整配置项
      */
@@ -28,6 +24,10 @@ class Article {
      * 文章挂载的元素
      */
     this.parent = parent
+    /**
+     * 用户数据
+     */
+    this.userData = userData
     /**
      * 目录对象
      */
@@ -56,6 +56,7 @@ class Article {
      * 渲染中需要使用的数据
      */
     this.data = {
+      userData: this.userData,
       mamagers: {
         eventManager: this.eventManager
       },

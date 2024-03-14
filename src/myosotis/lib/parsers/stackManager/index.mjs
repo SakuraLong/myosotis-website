@@ -7,14 +7,27 @@ import Title from './components/title.mjs'
 import List from './components/list.mjs'
 import Table from './components/table.mjs'
 
+/**
+ * 栈管理器
+ * 控制组件、结构、配置项的设置
+ * 构建组件树结构
+ */
 class StackManager {
   constructor(config, replaceManager) {
+    /**
+     * 配置项
+     */
     this.config = config
+    /**
+     * 替换管理器
+     */
     this.replaceManager = replaceManager
   }
+
   build(src) {
     return this.buildList(src)
   }
+
   buildList(src) {
     const data = {
       begin: -1,
@@ -52,6 +65,7 @@ class StackManager {
     // Title 3
     // List 4
     // Table 5
+    src = src.replace(/\n */g, '\n')
     for (let i = 0; i < src.length; i++) {
       if (data.status === -1) {
         // 进行全部起始判断
@@ -89,6 +103,12 @@ class StackManager {
     console.log(res)
     return res
   }
+
+  /**
+   * 将原始组件树的结构节点合并
+   * @param {Object} article_ 未优化的组件树
+   * @returns 优化完成的组件树
+   */
   mergeStructure(article_) {
     const article = new Structure(this.config, '', null).build()
     const tempStack = [article]

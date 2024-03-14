@@ -4,28 +4,28 @@
 = 结构测试
 
 {(begin|container)}
-{(begin|container|w=50%)}
-{(begin|container|w=100%)}
-{(begin|card|w=50%)}
-?config info|h=100%
-左左上
-{(end)}
-{(begin|card|w=50%)}
-?config info|h=100%
-左右上
-{(end)}
-{(begin|card|w=100%)}
-?config info|w=100%
-左
-{(end)}
-{(end)}
-{(end)}
-{(begin|card|w=50%)}
-?config info|h=100%
-右
-?config info|h=100%
-右
-{(end)}
+  {(begin|container|w=50%)}
+    {(begin|container|w=100%)}
+      {(begin|card|w=50%)}
+        ?config info|h=100%
+        左左上
+      {(end)}
+      {(begin|card|w=50%)}
+        ?config info|h=100%
+        左右上
+      {(end)}
+      {(begin|card|w=100%)}
+        ?config info|w=100%
+        左
+      {(end)}
+    {(end)}
+  {(end)}
+  {(begin|card|w=50%)}
+    ?config info|h=100%
+    右
+    ?config info|h=100%
+    右
+  {(end)}
 {(end)}
 
 = 组件测试
@@ -154,6 +154,21 @@ info段落
 | hide d | 1 c=2 | 2 r=2 |
 | hide d | 4 r=2 | 5 |
 | hide d | 3 c=2 |
+
+= 标签测试
+
+?config w=100%|TW=150px
+| 名称 | 测试结果 |
+| ignore | <my-i>{{a|https://www.nankai.edu.cn/|南开大学}}</my-i> |
+| code行内 | <code>javascript const my = 'Hello world'</code> |
+| code块 | <code>javascript
+const my = 'Hello world'
+</code> |
+| poem | <poem>
+123
+456
+789                            999
+</poem> |
 
 = 语法测试
 

@@ -173,7 +173,7 @@ class Renderer {
    * 可能有人会问，为什么不能用html节点进行子元素节点创建，这当然也是可以的
    * 但是如果需要定位每一个元素的信息，并且为标签设置配置项，那么必须要进行渲染器重写，因为html节点的渲染器没有配置项设置，只进行根据节点信息，返回一个html标签
    */
-  renderChildren(parent, children, rendererMap = null, onlyUseSelfMap = false) {
+  renderChildren(parent, children, rendererMap = null, onlyUseSelfMap = false, force = false) {
     const l = children.length
     for (let i = 0; i < l; i++) {
       if (this.previewFinishRender()) break
@@ -193,7 +193,10 @@ class Renderer {
       if (res.element === this.NOT_RENDER) continue
       childRenderer.htmlElement = res
       if (res.text) parent.append(res.element)
-      else parent.appendChild(res.element)
+      else {
+        if (force) parent.append(res.element.textContent)
+        else parent.appendChild(res.element)
+      }
     }
   }
 
